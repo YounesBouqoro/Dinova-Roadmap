@@ -1,159 +1,1064 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dinova Project Dashboard</title>
-  <style>
-    :root {
-      --bg: #0f1115;
-      --card: #171a21;
-      --line: #2a2f3a;
-      --text: #f4f7fb;
-      --muted: #9da7b8;
-      --accent: #f2552c;
-      --ok: #1f9d55;
-      --warn: #d97706;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
-    .hero {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .eyebrow {
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-    h1 { margin: 0; font-size: 34px; }
-    .sub { color: var(--muted); }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
-    }
-    .metric { font-size: 36px; font-weight: 700; margin: 8px 0; }
-    .label { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
-    ul { margin: 10px 0 0; padding-left: 18px; }
-    li { margin: 8px 0; }
-    .pill {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(242,85,44,.12);
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 700;
-      margin-top: 6px;
-    }
-    .milestone { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0; }
-    .status { color: var(--muted); }
-    .footer { margin-top: 24px; color: var(--muted); font-size: 14px; }
-    a { color: var(--text); }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dinova-Saina – E-Commerce Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f7f5;
+    --bg3: #edf2ed;
+    --green: #2e7d32;
+    --green-light: #4caf50;
+    --green-pale: #e8f5e9;
+    --green-mid: #a5d6a7;
+    --black: #111111;
+    --muted: #6b7280;
+    --border: #d1e7d1;
+    --red: #c62828;
+    --red-pale: #fdecea;
+    --amber: #e65100;
+    --amber-pale: #fff3e0;
+    --blue: #1565c0;
+    --blue-pale: #e3f0ff;
+    --radius: 12px;
+    --shadow: 0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg2);
+    color: var(--black);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ─── HEADER ───────────────────────────────────────────── */
+  .header {
+    background: var(--green);
+    color: #fff;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+  }
+  .header-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: .02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-logo span { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; opacity: .75; letter-spacing: .08em; text-transform: uppercase; }
+  .header-meta { font-size: 12px; opacity: .8; text-align: right; }
+
+  /* ─── NAV TABS ─────────────────────────────────────────── */
+  .nav-wrap {
+    background: var(--bg);
+    border-bottom: 2px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+    letter-spacing: .02em;
+    user-select: none;
+  }
+  .nav-tab:hover { color: var(--green); }
+  .nav-tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+  /* ─── MAIN LAYOUT ──────────────────────────────────────── */
+  .main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
+
+  /* ─── PANELS ───────────────────────────────────────────── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ─── SECTION TITLE ────────────────────────────────────── */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    margin-bottom: 4px;
+    color: var(--black);
+  }
+  .section-sub { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
+
+  /* ─── GRID LAYOUTS ─────────────────────────────────────── */
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; margin-bottom: 24px; }
+
+  /* ─── CARDS ────────────────────────────────────────────── */
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card-title { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+  .card-value { font-size: 36px; font-weight: 700; color: var(--green); line-height: 1; }
+  .card-value-sm { font-size: 22px; font-weight: 700; color: var(--black); line-height: 1.2; }
+  .card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ─── PROGRESS BAR ─────────────────────────────────────── */
+  .progress-bar-wrap { background: var(--bg3); border-radius: 999px; height: 8px; margin-top: 10px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--green); border-radius: 999px; transition: width .6s ease; }
+
+  /* ─── MILESTONE LIST ───────────────────────────────────── */
+  .milestone-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bg3);
+  }
+  .milestone-row:last-child { border-bottom: none; }
+  .ms-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .ms-dot.done { background: var(--green); }
+  .ms-dot.progress { background: var(--amber); }
+  .ms-dot.todo { background: var(--border); border: 2px solid var(--muted); }
+  .ms-name { flex: 1; font-weight: 500; font-size: 13px; }
+  .ms-status { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
+  .ms-status.done { background: var(--green-pale); color: var(--green); }
+  .ms-status.progress { background: var(--amber-pale); color: var(--amber); }
+  .ms-status.todo { background: var(--bg3); color: var(--muted); }
+
+  /* ─── PHASE ACCORDION ──────────────────────────────────── */
+  .phase-block { margin-bottom: 12px; }
+  .phase-header {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    user-select: none;
+    transition: background .15s;
+  }
+  .phase-header:hover { background: var(--green-pale); }
+  .phase-header.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: var(--border); background: var(--green-pale); }
+  .phase-badge {
+    background: var(--green);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: .04em;
+  }
+  .phase-title-text { flex: 1; font-weight: 700; font-size: 15px; }
+  .phase-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 16px; }
+  .phase-arrow { font-size: 16px; color: var(--muted); transition: transform .25s; }
+  .phase-header.open .phase-arrow { transform: rotate(180deg); }
+
+  .phase-body {
+    display: none;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+  }
+  .phase-body.open { display: block; }
+
+  /* ─── TASK TABLE ───────────────────────────────────────── */
+  .task-table { width: 100%; border-collapse: collapse; }
+  .task-table th {
+    background: var(--bg2);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .task-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bg3);
+    vertical-align: top;
+    font-size: 13px;
+  }
+  .task-table tr:last-child td { border-bottom: none; }
+  .task-table tr:hover td { background: var(--green-pale); }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .03em;
+  }
+  .tag-muss { background: #fce4ec; color: #b71c1c; }
+  .tag-soll { background: var(--amber-pale); color: #bf360c; }
+  .tag-kann { background: var(--blue-pale); color: #0d47a1; }
+  .tag-hoch { background: #fce4ec; color: #b71c1c; }
+  .tag-mittel { background: var(--amber-pale); color: #bf360c; }
+  .tag-niedrig { background: var(--green-pale); color: var(--green); }
+
+  .task-check {
+    width: 16px; height: 16px; accent-color: var(--green); cursor: pointer;
+  }
+
+  /* ─── RISK CARDS ───────────────────────────────────────── */
+  .risk-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--border);
+  }
+  .risk-card.hoch { border-left-color: var(--red); }
+  .risk-card.mittel { border-left-color: var(--amber); }
+  .risk-card.niedrig { border-left-color: var(--green-light); }
+  .risk-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .risk-title { font-weight: 700; font-size: 14px; }
+  .risk-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
+  .risk-badge.hoch { background: var(--red-pale); color: var(--red); }
+  .risk-badge.mittel { background: var(--amber-pale); color: var(--amber); }
+  .risk-badge.niedrig { background: var(--green-pale); color: var(--green); }
+  .risk-desc { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .risk-measure { font-size: 12px; background: var(--bg2); border-radius: 8px; padding: 8px 12px; color: var(--black); }
+  .risk-measure strong { color: var(--green); }
+
+  /* ─── DECISION CARDS ───────────────────────────────────── */
+  .decision-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .decision-id { font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .decision-q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .decision-status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+  .decision-status.open { background: var(--amber-pale); color: var(--amber); }
+  .decision-status.closed { background: var(--green-pale); color: var(--green); }
+  .decision-rec { margin-top: 12px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--bg3); padding-top: 10px; }
+  .decision-rec strong { color: var(--black); }
+
+  /* ─── NEXT ACTIONS TABLE ───────────────────────────────── */
+  .action-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--bg3);
+  }
+  .action-row:last-child { border-bottom: none; }
+  .action-prio {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .action-prio.p1 { background: #fce4ec; color: var(--red); }
+  .action-prio.p2 { background: var(--amber-pale); color: var(--amber); }
+  .action-prio.p3 { background: var(--green-pale); color: var(--green); }
+  .action-text { flex: 1; font-size: 13px; font-weight: 500; }
+  .action-owner { font-size: 12px; color: var(--muted); }
+  .action-deadline { font-size: 11px; font-weight: 700; padding: 2px 8px; background: var(--bg2); border-radius: 999px; color: var(--muted); white-space: nowrap; }
+
+  /* ─── FILTER ROW ───────────────────────────────────────── */
+  .filter-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+  .filter-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-right: 4px; }
+  .filter-btn {
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn:hover { border-color: var(--green); color: var(--green); }
+  .filter-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
+
+  /* ─── OVERVIEW SPECIFICS ────────────────────────────────── */
+  .open-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--bg3);
+    font-size: 13px;
+  }
+  .open-item:last-child { border-bottom: none; }
+  .open-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+
+  .category-tag {
+    display: inline-block; padding: 3px 10px;
+    background: var(--green-pale); color: var(--green);
+    border-radius: 999px; font-size: 12px; font-weight: 600;
+    margin: 3px;
+  }
+
+  /* ─── ATTR TABLE ───────────────────────────────────────── */
+  .attr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .attr-table th { background: var(--green); color: #fff; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .attr-table td { padding: 9px 12px; border-bottom: 1px solid var(--bg3); vertical-align: top; }
+  .attr-table tr:hover td { background: var(--green-pale); }
+  .check-yes { color: var(--green); font-weight: 700; }
+  .check-no { color: var(--muted); }
+
+  /* ─── PHASE TIMELINE ────────────────────────────────────── */
+  .timeline { display: flex; gap: 0; margin-bottom: 28px; overflow-x: auto; }
+  .timeline-phase { flex: 1; min-width: 140px; }
+  .tl-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+  .tl-bar { height: 10px; border-radius: 999px; margin-bottom: 4px; }
+  .tl-bar.done { background: var(--green); }
+  .tl-bar.active { background: repeating-linear-gradient(90deg, var(--green) 0, var(--green) 8px, var(--green-pale) 8px, var(--green-pale) 16px); }
+  .tl-bar.future { background: var(--border); }
+  .tl-weeks { font-size: 11px; color: var(--muted); }
+
+  /* ─── SCROLLABLE TABLE WRAPPER ──────────────────────────── */
+  .table-scroll { overflow-x: auto; }
+
+  /* ─── RESPONSIVE ────────────────────────────────────────── */
+  @media(max-width:640px) {
+    .header { padding: 0 16px; }
+    .nav-wrap { padding: 0 16px; }
+    .main { padding: 20px 12px 60px; }
+    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow">GitHub Pages Dashboard</div>
-      <h1 id="projectName">Dinova E-Commerce Setup</h1>
-      <div class="sub">Projektübersicht für Strategie, Roadmap und operative Steuerung.</div>
-      <div class="pill" id="phase">Phase 0 – Foundation</div>
-    </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="label">Gesamtfortschritt</div>
-        <div class="metric" id="progress">0%</div>
-        <div class="sub">Manuell pflegbar über <code>data/dashboard-data.json</code></div>
-      </div>
-      <div class="card">
-        <div class="label">Letztes Update</div>
-        <div class="metric" id="lastUpdated">-</div>
-        <div class="sub">Wöchentlich aktualisieren.</div>
-      </div>
-      <div class="card">
-        <div class="label">Strategie-Dokument</div>
-        <div class="metric" style="font-size:22px;">docs/strategy.md</div>
-        <div class="sub">Zentrale Leitplanke für Scope und Prioritäten.</div>
-      </div>
-    </div>
+<div class="header">
+  <div class="header-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="6" fill="rgba(255,255,255,.15)"/>
+      <path d="M7 8h6a7 7 0 0 1 0 14H7V8z" fill="white"/>
+      <circle cx="20" cy="20" r="3" fill="rgba(255,255,255,.6)"/>
+    </svg>
+    Dinova-Saina
+    <span>E-Commerce Aufbau</span>
+  </div>
+  <div class="header-meta">
+    Stand: April 2026<br/>
+    Phase 0 – Foundation
+  </div>
+</div>
 
-    <div class="grid" style="margin-top:16px;">
-      <div class="card">
-        <div class="label">Milestones</div>
-        <div id="milestones"></div>
-      </div>
-      <div class="card">
-        <div class="label">Offene Entscheidungen</div>
-        <ul id="decisions"></ul>
-      </div>
-      <div class="card">
-        <div class="label">Top-Risiken</div>
-        <ul id="risks"></ul>
-      </div>
-      <div class="card">
-        <div class="label">Nächste Maßnahmen</div>
-        <ul id="actions"></ul>
-      </div>
-    </div>
+<div class="nav-wrap">
+  <div class="nav-tab active" onclick="switchTab('overview')">Übersicht</div>
+  <div class="nav-tab" onclick="switchTab('roadmap')">Roadmap & Aufgaben</div>
+  <div class="nav-tab" onclick="switchTab('risiken')">Risiken</div>
+  <div class="nav-tab" onclick="switchTab('entscheidungen')">Entscheidungen</div>
+  <div class="nav-tab" onclick="switchTab('sortiment')">Sortiment & Attribute</div>
+  <div class="nav-tab" onclick="switchTab('naechste')">Nächste Schritte</div>
+</div>
 
-    <div class="footer">
-      Empfehlung: GitHub Projects für Steuerung nutzen und dieses Dashboard für Management-Überblick.
+<div class="main">
+
+<!-- ═══════════════════════════════ OVERVIEW ═══════════════════════════════ -->
+<div class="panel active" id="panel-overview">
+  <div class="section-title">Projektübersicht</div>
+  <div class="section-sub">Dinova-Saina – Digitaler Vertriebsaufbau von Grund auf. Shopify + Marktplätze.</div>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-title">Gesamtfortschritt</div>
+      <div class="card-value">12%</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:12%"></div></div>
+      <div class="card-sub">Phase 0 aktiv</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Offene Entscheidungen</div>
+      <div class="card-value" style="color:#e65100">6</div>
+      <div class="card-sub">Müssen vor Umsetzung getroffen werden</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top-Risiken aktiv</div>
+      <div class="card-value" style="color:#c62828">10</div>
+      <div class="card-sub">davon 4 mit hoher Wahrscheinlichkeit</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Aufgaben gesamt</div>
+      <div class="card-value">32</div>
+      <div class="card-sub">Phasen 0–5</div>
     </div>
   </div>
 
-  <script>
-    fetch('./data/dashboard-data.json')
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById('projectName').textContent = data.projectName;
-        document.getElementById('phase').textContent = data.currentPhase;
-        document.getElementById('progress').textContent = data.overallProgress + '%';
-        document.getElementById('lastUpdated').textContent = data.lastUpdated;
+  <!-- Milestone Progress -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Milestones</div>
+      <div class="milestone-row">
+        <div class="ms-dot progress"></div>
+        <div class="ms-name">M1 – Foundation abgeschlossen</div>
+        <div class="ms-status progress">In Arbeit</div>
+      </div>
+      <div class="milestone-row">
+        <div class="ms-dot todo"></div>
+        <div class="ms-name">M2 – Shopify Core Setup</div>
+        <div class="ms-status todo">Offen</div>
+      </div>
+      <div class="milestone-row">
+        <div class="ms-dot todo"></div>
+        <div class="ms-name">M3 – Pilotgruppe content-ready</div>
+        <div class="ms-status todo">Offen</div>
+      </div>
+      <div class="milestone-row">
+        <div class="ms-dot todo"></div>
+        <div class="ms-name">M4 – Shopify Go-Live ready</div>
+        <div class="ms-status todo">Offen</div>
+      </div>
+      <div class="milestone-row">
+        <div class="ms-dot todo"></div>
+        <div class="ms-name">M5 – Marktplatzdaten ready</div>
+        <div class="ms-status todo">Offen</div>
+      </div>
+    </div>
 
-        const milestones = document.getElementById('milestones');
-        data.milestones.forEach(m => {
-          const row = document.createElement('div');
-          row.className = 'milestone';
-          row.innerHTML = `<span>${m.name}</span><span class="status">${m.status}</span>`;
-          milestones.appendChild(row);
-        });
+    <div class="card">
+      <div class="card-title">Offene Entscheidungen</div>
+      <div class="open-item"><div class="open-dot"></div>E1 – Positionierung: Premium vs. Mid-Market</div>
+      <div class="open-item"><div class="open-dot"></div>E2 – B2C only vs. B2C + B2B in Phase 1</div>
+      <div class="open-item"><div class="open-dot"></div>E3 – Eigenmarke vs. Fremdmarken vs. Mix</div>
+      <div class="open-item"><div class="open-dot"></div>E4 – Lager- und Fulfillment-Modell</div>
+      <div class="open-item"><div class="open-dot"></div>E5 – Shopify-Plan & App-Stack</div>
+      <div class="open-item"><div class="open-dot"></div>E6 – Marktplatz-Priorisierung</div>
+    </div>
+  </div>
 
-        const fillList = (id, items) => {
-          const el = document.getElementById(id);
-          items.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            el.appendChild(li);
-          });
-        };
+  <!-- Phase Timeline -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title" style="margin-bottom:16px;">Zeitplan-Übersicht (vereinfacht)</div>
+    <div style="overflow-x:auto;">
+      <div style="display:grid; grid-template-columns: 120px repeat(20,1fr); gap:0; min-width:600px;">
+        <!-- header -->
+        <div style="font-size:11px;color:var(--muted);font-weight:700;padding-bottom:8px;"></div>
+        <div style="grid-column:2/22; display:flex; margin-bottom:8px;">
+          <div style="flex:4;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 1–4</div>
+          <div style="flex:6;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 5–10</div>
+          <div style="flex:6;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 11–16</div>
+          <div style="flex:4;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 17+</div>
+        </div>
+      </div>
+      <div id="timeline-rows"></div>
+    </div>
+  </div>
 
-        fillList('decisions', data.openDecisions);
-        fillList('risks', data.topRisks);
-        fillList('actions', data.nextActions);
-      });
-  </script>
+  <!-- Quick Stats Row -->
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title">Kritischer Pfad</div>
+      <div style="font-size:13px;line-height:2;">
+        <span class="category-tag">Sortimentsaufnahme</span>
+        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
+        <span class="category-tag">Attributmodell</span>
+        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
+        <span class="category-tag">Produktdaten</span>
+        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
+        <span class="category-tag">Shopify-Setup</span>
+        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
+        <span class="category-tag">Content</span>
+        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
+        <span class="category-tag">Launch</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Marktplatz-Priorität</div>
+      <div style="font-size:13px;line-height:2.2;">
+        <span style="font-weight:700;color:var(--green);">① Amazon</span><span style="color:var(--muted);font-size:12px;"> – Höchste Reichweite</span><br/>
+        <span style="font-weight:700;color:var(--black);">② OTTO</span><span style="color:var(--muted);font-size:12px;"> – Stärke bei Wohnen/Haushalt</span><br/>
+        <span style="font-weight:700;color:var(--black);">③ Kaufland</span><span style="color:var(--muted);font-size:12px;"> – Einfacher Einstieg</span><br/>
+        <span style="font-weight:700;color:var(--muted);">④ Wayfair</span><span style="color:var(--muted);font-size:12px;"> – Phase 3+</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sofort-Maßnahmen (diese Woche)</div>
+      <div style="font-size:13px;line-height:2;">
+        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">1</div>&nbsp;Sortiments-Inventur starten</div>
+        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">2</div>&nbsp;EAN-Status aller Artikel prüfen</div>
+        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">3</div>&nbsp;Entscheidungen E1–E6 abstimmen</div>
+        <div class="open-item"><div class="action-prio p2" style="display:inline-flex;width:20px;height:20px;font-size:11px;">4</div>&nbsp;Pilotgruppe 50 Artikel definieren</div>
+        <div class="open-item"><div class="action-prio p2" style="display:inline-flex;width:20px;height:20px;font-size:11px;">5</div>&nbsp;Attributmodell finalisieren</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ ROADMAP ════════════════════════════════ -->
+<div class="panel" id="panel-roadmap">
+  <div class="section-title">Roadmap & Aufgaben</div>
+  <div class="section-sub">Alle Arbeitspakete nach Phase. Typ (MUSS/SOLL/KANN) und Aufwand sind markiert.</div>
+
+  <div class="filter-row">
+    <span class="filter-label">Typ:</span>
+    <button class="filter-btn active" onclick="filterTasks('all',this)">Alle</button>
+    <button class="filter-btn" onclick="filterTasks('muss',this)">MUSS</button>
+    <button class="filter-btn" onclick="filterTasks('soll',this)">SOLL</button>
+    <button class="filter-btn" onclick="filterTasks('kann',this)">KANN</button>
+  </div>
+
+  <div id="phase-accordions"></div>
+</div>
+
+<!-- ═══════════════════════════════ RISIKEN ═══════════════════════════════ -->
+<div class="panel" id="panel-risiken">
+  <div class="section-title">Risikoregister</div>
+  <div class="section-sub">Identifizierte Risiken mit Eintrittswahrscheinlichkeit, Auswirkung und Gegenmaßnahmen.</div>
+
+  <div class="filter-row">
+    <span class="filter-label">Wahrscheinlichkeit:</span>
+    <button class="filter-btn active" onclick="filterRisks('all',this)">Alle</button>
+    <button class="filter-btn" onclick="filterRisks('hoch',this)">Hoch</button>
+    <button class="filter-btn" onclick="filterRisks('mittel',this)">Mittel</button>
+    <button class="filter-btn" onclick="filterRisks('niedrig',this)">Niedrig</button>
+  </div>
+
+  <div id="risk-grid" class="grid-2"></div>
+</div>
+
+<!-- ════════════════════════════ ENTSCHEIDUNGEN ═══════════════════════════ -->
+<div class="panel" id="panel-entscheidungen">
+  <div class="section-title">Strategische Entscheidungen</div>
+  <div class="section-sub">Diese 6 Entscheidungen müssen getroffen werden, BEVOR operative Arbeit beginnt. Jede offene Entscheidung ist ein Risiko für Nacharbeit.</div>
+
+  <div id="decisions-grid" class="grid-2"></div>
+</div>
+
+<!-- ════════════════════════════ SORTIMENT & ATTRIBUTE ═══════════════════ -->
+<div class="panel" id="panel-sortiment">
+  <div class="section-title">Sortiment, Kategorien & Attribute</div>
+  <div class="section-sub">Kategoriebaum, Attributmodell und Variantenlogik für Shopify und Marktplätze.</div>
+
+  <div class="grid-2">
+    <!-- Kategoriebaum -->
+    <div class="card">
+      <div class="card-title">Kategoriebaum (Vorschlag)</div>
+      <div id="category-tree" style="font-size:13px;line-height:1.8;"></div>
+    </div>
+    <!-- Variantenlogik -->
+    <div class="card">
+      <div class="card-title">Variantenlogik (Shopify)</div>
+      <div class="table-scroll">
+        <table class="attr-table" style="font-size:12px;">
+          <thead><tr><th>Variantentyp</th><th>Beispiel</th><th>Umsetzung</th></tr></thead>
+          <tbody>
+            <tr><td>Farbe</td><td>Weiß / Creme / Blau</td><td>Variant: Farbe</td></tr>
+            <tr><td>Größe / Menge</td><td>21cm / 26cm / 28cm</td><td>Variant: Größe</td></tr>
+            <tr><td>Set-Größe</td><td>2er / 4er / 6er-Set</td><td>Variant: Menge</td></tr>
+            <tr><td>Material</td><td>Bone China / Porzellan</td><td>Eigener Artikel ❌</td></tr>
+            <tr><td>Dekor</td><td>Uni / Blumendekor</td><td>Variant: Design</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;padding:12px;background:var(--green-pale);border-radius:8px;font-size:12px;color:var(--green);">
+        <strong>Grundregel:</strong> Max. 2 Variantenebenen pro Produkt. Drei Ebenen = UX-Problem + Verwaltungskomplexität.
+      </div>
+      <div style="margin-top:10px;padding:12px;background:var(--amber-pale);border-radius:8px;font-size:12px;color:var(--amber);">
+        <strong>Eigenständige Artikel (keine Variante):</strong> Unterschiedliche Materialien · Unterschiedliche Kategorien · Komplett anderes Bildset · Preis-Abweichung >40%
+      </div>
+    </div>
+  </div>
+
+  <!-- Attributmodell -->
+  <div class="card">
+    <div class="card-title">Kern-Attributmodell (alle Artikel)</div>
+    <div class="table-scroll">
+      <table class="attr-table">
+        <thead>
+          <tr><th>Attribut</th><th>Beispiel</th><th>Pflicht?</th><th>Shop</th><th>Amazon</th><th>OTTO</th></tr>
+        </thead>
+        <tbody id="attr-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ NÄCHSTE SCHRITTE ════════════════════════ -->
+<div class="panel" id="panel-naechste">
+  <div class="section-title">Nächste Schritte & Sofortmaßnahmen</div>
+  <div class="section-sub">Priorisierte Handlungsliste. P1 = diese Woche, P2 = diese Phase, P3 = später.</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Sprint 0 – Sofortmaßnahmen (Woche 1–2)</div>
+      <div id="sprint0-actions"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Checkliste: Was muss Dinova liefern?</div>
+      <div id="dinova-checklist"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sprint 1 – Shopify-Basis Checkliste (Woche 3–6)</div>
+    <div id="sprint1-checklist" style="column-count:2;column-gap:32px;"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════
+
+const phases = [
+  {
+    id:'p0', label:'Phase 0', title:'Foundation & Entscheidungen', weeks:'Wochen 1–4',
+    status:'active', tasks:[
+      { id:'0.1', title:'Sortimentsaufnahme & -bewertung', type:'MUSS', aufwand:'hoch', detail:'Vollständige Liste aller Artikel mit Basisdaten. Excel/Google Sheet.' },
+      { id:'0.2', title:'Strategische Entscheidungen E1–E6 treffen', type:'MUSS', aufwand:'mittel', detail:'Workshop mit GF. Output: Entscheidungsprotokoll (1 Seite).' },
+      { id:'0.3', title:'Zielkundenprofile definieren (B2C, ggf. B2B)', type:'MUSS', aufwand:'mittel', detail:'2–3 konkrete Zielkunden-Personas.' },
+      { id:'0.4', title:'Wettbewerbsanalyse (3–5 direkte Wettbewerber)', type:'SOLL', aufwand:'mittel', detail:'Online-Shops, Marktplatzpräsenz, Preislogik, Content-Qualität.' },
+      { id:'0.5', title:'Kundendaten-Checkliste übergeben', type:'MUSS', aufwand:'hoch', detail:'Unternehmensdaten, Sortimentsdaten, Logistik, Branding, Technisches.' },
+      { id:'0.6', title:'Lieferanten-, Einkaufs- und Lagersituation klären', type:'MUSS', aufwand:'mittel', detail:'Alle Lieferanten, MOQs, Lieferzeiten, Lagerort & -kapazität.' },
+      { id:'0.7', title:'Technologie-Stack final festlegen', type:'MUSS', aufwand:'niedrig', detail:'Shopify-Plan, App-Stack, Middleware, PIM (falls nötig).' },
+      { id:'0.8', title:'EAN-Status aller Artikel prüfen', type:'MUSS', aufwand:'mittel', detail:'Ohne EAN kein Amazon/OTTO-Listing. GTINs bei GS1 Germany beantragen.' },
+      { id:'0.9', title:'Pilotgruppe 20–50 Artikel definieren', type:'MUSS', aufwand:'mittel', detail:'Hohe Marge/Fotos vorhanden/EAN vorhanden/Repräsentativ.' },
+      { id:'0.10', title:'Kategoriebaum finalisieren', type:'MUSS', aufwand:'mittel', detail:'Max. 3 Ebenen, SEO-gerecht, marktplatzkompatibel.' },
+      { id:'0.11', title:'Attributmodell finalisieren', type:'MUSS', aufwand:'hoch', detail:'Pflichtfelder für Shop + Marktplätze. Einmal richtig – Änderungen sind teuer.' },
+    ]
+  },
+  {
+    id:'p1', label:'Phase 1', title:'Shopify Core Setup', weeks:'Wochen 3–8',
+    status:'todo', tasks:[
+      { id:'1.1', title:'Shopify-Plan wählen + Shop anlegen', type:'MUSS', aufwand:'niedrig', detail:'Basic vs. Shopify Plan. Abhängig von Budget und B2B-Bedarf.' },
+      { id:'1.2', title:'Theme-Auswahl & Grundkonfiguration', type:'MUSS', aufwand:'mittel', detail:'Premium-Theme empfohlen. EUR, DE, Steuerlogik.' },
+      { id:'1.3', title:'Kategoriebaum in Shopify aufbauen', type:'MUSS', aufwand:'mittel', detail:'Collections anlegen, Navigation konfigurieren.' },
+      { id:'1.4', title:'Attributmodell & Variantenlogik definieren', type:'MUSS', aufwand:'hoch', detail:'Metafields für Shopify anlegen.' },
+      { id:'1.5', title:'Erste Produktdaten einpflegen (Pilotgruppe)', type:'MUSS', aufwand:'hoch', detail:'20–50 Artikel vollständig mit allen Attributen.' },
+      { id:'1.6', title:'Zahlungsarten konfigurieren', type:'MUSS', aufwand:'niedrig', detail:'Klarna, PayPal, Kreditkarte, Vorkasse.' },
+      { id:'1.7', title:'Versandprofile, Zonen, Tarife', type:'MUSS', aufwand:'mittel', detail:'DE, EU, ggf. Weltweite Versandzonen.' },
+      { id:'1.8', title:'Rechtliche Seiten: Impressum, AGB, Datenschutz, Widerruf', type:'MUSS', aufwand:'mittel', detail:'IT-Recht Kanzlei oder Händlerbund. Kein Copy-Paste!' },
+      { id:'1.9', title:'E-Mail-Flows: Bestellbestätigung, Versand, Retoure', type:'MUSS', aufwand:'mittel', detail:'Shopify Standard-Flows anpassen.' },
+      { id:'1.10', title:'Domain, SSL, technische Grundkonfiguration', type:'MUSS', aufwand:'niedrig', detail:'' },
+      { id:'1.11', title:'Analytics: GA4, Meta Pixel, Shopify Analytics', type:'SOLL', aufwand:'niedrig', detail:'Von Anfang an sauber tracken.' },
+      { id:'1.12', title:'Steuerlogik (DE, EU, OSS) konfigurieren', type:'MUSS', aufwand:'mittel', detail:'Steuerberater konsultieren.' },
+    ]
+  },
+  {
+    id:'p2', label:'Phase 2', title:'Sortimentsaufbau & Content', weeks:'Wochen 6–14',
+    status:'todo', tasks:[
+      { id:'2.1', title:'Produkt-Priorisierung nach ABC-Logik', type:'MUSS', aufwand:'mittel', detail:'A = Launch, B = Q2, C = später.' },
+      { id:'2.2', title:'Produktfotos planen & produzieren', type:'MUSS', aufwand:'hoch', detail:'Briefing erstellen. Weißer HG + Lifestyle + Details. Min. 3–5 Bilder/Artikel.' },
+      { id:'2.3', title:'Produkttexte erstellen', type:'MUSS', aufwand:'hoch', detail:'Titel, Beschreibung, Bullet Points. SEO-optimiert.' },
+      { id:'2.4', title:'Vollständige Produktdaten pflegen', type:'MUSS', aufwand:'hoch', detail:'Alle Pflichtattribute für Shop + Marktplätze.' },
+      { id:'2.5', title:'Preislogik finalisieren', type:'MUSS', aufwand:'mittel', detail:'UVP, Aktionspreis, B2B-Preis, Marktplatz-Preis.' },
+      { id:'2.6', title:'Bestandsführung & Lageranbindung klären', type:'MUSS', aufwand:'mittel', detail:'Single Source of Truth für Bestände definieren.' },
+      { id:'2.7', title:'SEO-Basis für Produkte & Kategorieseiten', type:'SOLL', aufwand:'mittel', detail:'Meta Titles, Descriptions, H1-Struktur.' },
+      { id:'2.8', title:'Marken-/Herkunftsinformationen aufbereiten', type:'SOLL', aufwand:'niedrig', detail:'Storytelling-Elemente für Premium-Positionierung.' },
+    ]
+  },
+  {
+    id:'p3', label:'Phase 3', title:'Shopify Go-Live', weeks:'Wochen 12–16',
+    status:'todo', tasks:[
+      { id:'3.1', title:'Interne QS: alle Produktseiten, Checkout, Flows', type:'MUSS', aufwand:'mittel', detail:'QS-Checkliste abarbeiten.' },
+      { id:'3.2', title:'Soft Launch (begrenzter Traffic)', type:'SOLL', aufwand:'niedrig', detail:'Freundes-/Familienkreis, dann langsam ausweiten.' },
+      { id:'3.3', title:'Performance-Review 2 Wochen nach Launch', type:'MUSS', aufwand:'mittel', detail:'Conversion, Bounce Rate, Warenkorb-Abbrüche.' },
+      { id:'3.4', title:'Conversion-Optimierung auf Basis erster Daten', type:'SOLL', aufwand:'mittel', detail:'' },
+    ]
+  },
+  {
+    id:'p4', label:'Phase 4', title:'Marktplatzvorbereitung', weeks:'ab Woche 14',
+    status:'todo', tasks:[
+      { id:'4.1', title:'Marktplatz-Priorisierung final (Amazon, OTTO, Kaufland)', type:'MUSS', aufwand:'mittel', detail:'' },
+      { id:'4.2', title:'EAN-Struktur prüfen / GTINs beschaffen', type:'MUSS', aufwand:'mittel', detail:'GS1 Germany. Lead Time: 2–4 Wochen.' },
+      { id:'4.3', title:'Marktplatz-spezifische Attribut-Anforderungen klären', type:'MUSS', aufwand:'hoch', detail:'Amazon Browse-Nodes, OTTO-Kategorien, Kaufland-Felder.' },
+      { id:'4.4', title:'Dienstleister-Briefing & techn. Anbindung vorbereiten', type:'MUSS', aufwand:'mittel', detail:'Middleware-Konzept. Shopify als Single Source of Truth.' },
+      { id:'4.5', title:'Seller-Accounts anlegen', type:'MUSS', aufwand:'mittel', detail:'Amazon Seller Central, OTTO Market, Kaufland Seller.' },
+      { id:'4.6', title:'Content-Anpassung für Marktplatz-Anforderungen', type:'SOLL', aufwand:'hoch', detail:'Amazon-spezifische Bullet Points, A+ Content, OTTO-Texte.' },
+      { id:'4.7', title:'Repricing-Logik & Marktplatz-Preise definieren', type:'MUSS', aufwand:'mittel', detail:'Preisparität beachten. Marktplatz-Gebühren einkalkulieren.' },
+    ]
+  },
+  {
+    id:'p5', label:'Phase 5', title:'Marktplatz Go-Live & Skalierung', weeks:'ab Woche 20+',
+    status:'todo', tasks:[
+      { id:'5.1', title:'Amazon Launch (Priorität 1)', type:'MUSS', aufwand:'hoch', detail:'' },
+      { id:'5.2', title:'Performance-Monitoring Marktplätze', type:'MUSS', aufwand:'mittel', detail:'' },
+      { id:'5.3', title:'OTTO / Kaufland Launch', type:'SOLL', aufwand:'hoch', detail:'' },
+      { id:'5.4', title:'Prozessoptimierung & Automatisierung', type:'SOLL', aufwand:'mittel', detail:'' },
+      { id:'5.5', title:'B2B-Kanal evaluieren (Shopify B2B)', type:'KANN', aufwand:'hoch', detail:'Nur wenn B2B-Umsatz signifikant.' },
+    ]
+  }
+];
+
+const risks = [
+  { id:'R1', title:'Fehlende oder schlechte Produktdaten', prob:'hoch', desc:'Maße, Gewichte, EANs fehlen. Shopify-Setup verzögert sich. Marktplatz-Onboarding scheitert.', measure:'Datenerhebung als erstes Arbeitspaket. Template erstellen, systematisch befüllen.' },
+  { id:'R2', title:'Fehlende EAN/GTINs', prob:'hoch', desc:'Artikel ohne EAN können auf Amazon und OTTO nicht gelistet werden.', measure:'Sofort prüfen. EANs bei GS1 Germany beantragen. Lead Time: 2–4 Wochen.' },
+  { id:'R3', title:'Unklare Positionierung – falsche Preissetzung', prob:'mittel', desc:'Preise werden inkonsistent gesetzt. Margenprobleme, Vertrauensverlust.', measure:'Entscheidung E1 vor Preisgestaltung treffen.' },
+  { id:'R4', title:'Zu breites Sortiment im Start', prob:'hoch', desc:'Qualitätsprobleme bei Content, Fotos, Lagerführung.', measure:'Harte Pilotgruppe: max. 50 Artikel in Phase 1.' },
+  { id:'R5', title:'Schlechte Produktfotos', prob:'hoch', desc:'Porzellan und Glas sind schwierig zu fotografieren. Niedrige Conversion, höhere Retouren.', measure:'Professioneller Fotograf mit Erfahrung Geschirr/Glas. Klares Briefing erstellen.' },
+  { id:'R6', title:'Versandprobleme mit Bruch-Ware', prob:'mittel', desc:'Porzellan, Glas und Opalglas sind fragil. Hohe Bruchquote bei schlechter Verpackung.', measure:'Verpackungskonzept früh entwickeln. Testversand vor Launch. Klare SOP.' },
+  { id:'R7', title:'Zu frühe Marktplatz-Anbindung', prob:'mittel', desc:'Gleichzeitig 3 Marktplätze neben dem Shop. Doppelter Aufwand, Datenfehler, Überverkäufe.', measure:'Sequenzielle Reihenfolge: Shopify stabil → Marktplatz 1 → Marktplatz 2.' },
+  { id:'R8', title:'Daten-Silo Shopify / Marktplätze', prob:'mittel', desc:'Bestände, Preise, Produktdaten werden manuell gepflegt. Fehler häufen sich.', measure:'Frühzeitig Middleware/PIM mit Dienstleister klären. Shopify als Single Source of Truth.' },
+  { id:'R9', title:'Rechtliche Lücken', prob:'mittel', desc:'Impressum, AGB, Datenschutz, Widerruf, Preisangabenverordnung nicht korrekt.', measure:'Rechtstexte von IT-Recht Kanzlei oder Händlerbund beziehen. Kein Copy-Paste.' },
+  { id:'R10', title:'Kapazitätsunterschätzung Content', prob:'hoch', desc:'Guter Produktcontent (Text + Bild + Attribute) für 200+ Artikel ist ein Vollzeit-Projekt.', measure:'Realistische Kapazitätsplanung. Content-Sprint mit Tagzielen. Externe Texter/Fotografen.' },
+];
+
+const decisions = [
+  {
+    id:'E1', q:'Positionierung im Markt – Premium, Mid-Market oder Preis?',
+    status:'open', rec:'Premium (Bone China, Qualitätsmarken) empfohlen: höhere Margen, bessere Differenzierung, weniger Preiskampf. Bone China und Opalglas stützen diese Entscheidung.',
+    impact:'Direkte Auswirkung auf Content-Anforderungen, Preissetzung, Zielgruppenstrategie, Theme-Wahl.'
+  },
+  {
+    id:'E2', q:'B2C vs. B2B – Scope Phase 1?',
+    status:'open', rec:'Phase 1 rein B2C (Shopify Standard) empfohlen. Weniger Komplexität. B2B erst in Phase 2+ wenn aktive B2B-Kunden vorhanden und umsatzrelevant.',
+    impact:'Hat Dinova-Saina bereits aktive B2B-Kunden? Welcher Anteil am Umsatz?'
+  },
+  {
+    id:'E3', q:'Eigenmarke vs. Fremdartikel vs. Mix?',
+    status:'open', rec:'Kritisch für EAN-Strategie und Amazon-Listings. Bei Eigenmarke: eigene GTINs bei GS1 registrieren. Bei Fremdmarken: EAN vom Hersteller.',
+    impact:'Direkte Auswirkung auf Produktdaten-Aufwand, Bildrechte, EAN-Vergabe, Amazon-Listings.'
+  },
+  {
+    id:'E4', q:'Lager- und Fulfillment-Strategie?',
+    status:'open', rec:'Eigenlager bietet Kontrolle und Marge. 3PL ist skalierbar, aber kostenpflichtiger. Dropshipping birgt Lieferzeitrisiken (kritisch für Marktplätze).',
+    impact:'Fundamentale Auswirkung auf Preisgestaltung, Lieferzeiten und Marktplatz-Bewertungen.'
+  },
+  {
+    id:'E5', q:'Shopify-Plan & App-Stack?',
+    status:'open', rec:'MUSS-Apps: Klaviyo, Sufio/Order Printer Pro, Matrixify. SOLL: Tidio/Gorgias. KANN: Loox/Judge.me, Bundles-App.',
+    impact:'Abhängig von Budget und internen Ressourcen. App-Kosten addieren sich schnell.'
+  },
+  {
+    id:'E6', q:'Marktplatz-Priorisierung?',
+    status:'open', rec:'Empfehlung: 1. Amazon (Reichweite), 2. OTTO (Wohnen-Stärke, höhere Margen), 3. Kaufland (einfacher Einstieg), 4. Wayfair (Phase 3+).',
+    impact:'Abhängig von Kategorie-Zugängen, EAN-Verfügbarkeit, Ressourcen und Fulfillment-Modell.'
+  },
+];
+
+const attributes = [
+  ['Produkttitel','Bone China Teller 28cm, weiß','MUSS',true,true,true],
+  ['Marke / Brand','Dinova / Maxwell & Williams','MUSS',true,true,true],
+  ['EAN / GTIN','4012345678901','MUSS',true,true,true],
+  ['SKU (intern)','DS-TEL-28-WH','MUSS',true,true,true],
+  ['Material','Bone China','MUSS',true,true,true],
+  ['Farbe','Weiß','MUSS',true,true,true],
+  ['Maße (L×B×H cm)','28 × 28 × 2,5','MUSS',true,true,true],
+  ['Gewicht (g)','420','MUSS',true,true,true],
+  ['Spülmaschinenfest','ja / nein','MUSS',true,true,true],
+  ['Mikrowellengeeignet','ja / nein','MUSS',true,true,true],
+  ['Set-Inhalt / Menge','1 Stück / 6er-Set','MUSS',true,true,true],
+  ['Herstellungsland','Portugal / China','MUSS',true,true,true],
+  ['Einkaufspreis (netto)','intern','MUSS',false,false,false],
+  ['UVP / VK-Preis (brutto)','29,95 €','MUSS',true,true,true],
+  ['Bestand','aktuell / dauerhaft','MUSS',true,true,true],
+  ['Kurzbeschreibung (3–5 Bullets)','…','MUSS',true,true,true],
+  ['Langbeschreibung (200–500 Wörter)','…','MUSS',true,true,false],
+  ['Bild-URLs (min. 3)','https://…','MUSS',true,true,true],
+];
+
+const categoryTree = [
+  { name:'Tischkultur', children:[
+    { name:'Geschirr', children:['Komplettservice','Teller (Speise, Suppe, Dessert)','Schüsseln & Schalen','Platten & Servierplatten','Zubehör (Saucieren, Terrinen)'] },
+    { name:'Gläser & Trinkgefäße', children:['Opalglas','Weingläser','Wassergläser','Sektgläser','Becher & Tassen'] },
+    { name:'Besteck', children:['Besteck-Sets','Einzelteile','Servierbesteck'] },
+    { name:'Tischaccessoires', children:['Tischläufer & -decken','Servietten','Kerzen & Kerzenhalter'] },
+  ]},
+  { name:'Wohnkultur', children:[
+    { name:'Vasen & Deko', children:[] },
+    { name:'Schalen & Dekoschalen', children:[] },
+    { name:'Bilderrahmen', children:[] },
+    { name:'Wohnaccessoires', children:[] },
+  ]},
+  { name:'Sets & Kollektionen', children:[
+    { name:'Geschenksets', children:[] },
+    { name:'Komplettservice', children:[] },
+    { name:'Saisonale Kollektionen', children:[] },
+  ]},
+  { name:'Sale', children:[] },
+];
+
+// ══════════════════════════════════════════════════════════
+// RENDERING
+// ══════════════════════════════════════════════════════════
+
+function switchTab(id) {
+  document.querySelectorAll('.nav-tab').forEach((t,i)=> t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+// Roadmap
+let currentFilter = 'all';
+function buildRoadmap() {
+  const wrap = document.getElementById('phase-accordions');
+  wrap.innerHTML = '';
+  phases.forEach(ph => {
+    const tasks = currentFilter === 'all' ? ph.tasks : ph.tasks.filter(t => t.type.toLowerCase() === currentFilter);
+    if(!tasks.length && currentFilter !== 'all') return;
+    const done = tasks.filter(t => document.getElementById('chk-'+t.id)?.checked).length;
+    const block = document.createElement('div');
+    block.className = 'phase-block';
+    block.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${ph.id}')">
+        <span class="phase-badge">${ph.label}</span>
+        <span class="phase-title-text">${ph.title}</span>
+        <span class="phase-meta">
+          <span>⏱ ${ph.weeks}</span>
+          <span>${tasks.length} Aufgaben</span>
+        </span>
+        <span class="phase-arrow">▼</span>
+      </div>
+      <div class="phase-body" id="body-${ph.id}">
+        <div class="table-scroll">
+          <table class="task-table">
+            <thead><tr><th style="width:36px"></th><th style="width:60px">#</th><th>Aufgabe</th><th style="width:80px">Typ</th><th style="width:90px">Aufwand</th></tr></thead>
+            <tbody>
+              ${tasks.map(t => `
+                <tr>
+                  <td><input type="checkbox" class="task-check" id="chk-${t.id}" onchange="updateProgress()"/></td>
+                  <td style="color:var(--muted);font-weight:600;">${t.id}</td>
+                  <td>
+                    <div style="font-weight:600;">${t.title}</div>
+                    ${t.detail ? `<div style="color:var(--muted);font-size:12px;margin-top:2px;">${t.detail}</div>` : ''}
+                  </td>
+                  <td><span class="tag tag-${t.type.toLowerCase()}">${t.type}</span></td>
+                  <td><span class="tag tag-${t.aufwand}">${t.aufwand}</span></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>`;
+    wrap.appendChild(block);
+  });
+  // open phase 0 by default
+  const p0 = document.querySelector('.phase-header');
+  if(p0 && !document.getElementById('body-p0')?.classList.contains('open')) {
+    p0.classList.add('open');
+    document.getElementById('body-p0').classList.add('open');
+  }
+}
+
+function togglePhase(id) {
+  const header = event.currentTarget;
+  const body = document.getElementById('body-'+id);
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function filterTasks(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildRoadmap();
+}
+
+function updateProgress() {
+  const all = document.querySelectorAll('.task-check').length;
+  const done = document.querySelectorAll('.task-check:checked').length;
+  const pct = all ? Math.round(done/all*100) : 0;
+  // update overview cards if visible
+}
+
+// Risks
+function buildRisks() {
+  const grid = document.getElementById('risk-grid');
+  grid.innerHTML = '';
+  risks.forEach(r => {
+    const card = document.createElement('div');
+    card.className = `risk-card ${r.prob}`;
+    card.dataset.prob = r.prob;
+    card.innerHTML = `
+      <div class="risk-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-weight:800;color:var(--muted);font-size:12px;">${r.id}</span>
+          <span class="risk-title">${r.title}</span>
+        </div>
+        <span class="risk-badge ${r.prob}">${r.prob.charAt(0).toUpperCase()+r.prob.slice(1)}</span>
+      </div>
+      <div class="risk-desc">${r.desc}</div>
+      <div class="risk-measure"><strong>Gegenmaßnahme:</strong> ${r.measure}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterRisks(f, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.risk-card').forEach(c => {
+    c.style.display = (f === 'all' || c.dataset.prob === f) ? 'block' : 'none';
+  });
+}
+
+// Decisions
+function buildDecisions() {
+  const grid = document.getElementById('decisions-grid');
+  grid.innerHTML = '';
+  decisions.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'decision-card';
+    card.innerHTML = `
+      <div class="decision-id">${d.id}</div>
+      <div class="decision-q">${d.q}</div>
+      <span class="decision-status ${d.status}">
+        ${d.status === 'open' ? '⚠️ Offen – muss geklärt werden' : '✅ Entschieden'}
+      </span>
+      <div class="decision-rec">
+        <strong>Empfehlung:</strong> ${d.rec}<br/>
+        <span style="color:var(--amber);font-size:12px;margin-top:6px;display:block;">⚡ ${d.impact}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// Attributes
+function buildAttributes() {
+  const tbody = document.getElementById('attr-table-body');
+  tbody.innerHTML = '';
+  attributes.forEach(([attr,ex,pflicht,shop,amazon,otto]) => {
+    const yes = '<span class="check-yes">✓</span>';
+    const no = '<span class="check-no">–</span>';
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${attr}</strong></td>
+      <td style="color:var(--muted);font-size:12px;">${ex}</td>
+      <td><span class="tag tag-${pflicht.toLowerCase()}">${pflicht}</span></td>
+      <td style="text-align:center;">${shop?yes:no}</td>
+      <td style="text-align:center;">${amazon?yes:no}</td>
+      <td style="text-align:center;">${otto?yes:no}</td>`;
+    tbody.appendChild(row);
+  });
+}
+
+// Category Tree
+function buildCategoryTree() {
+  const wrap = document.getElementById('category-tree');
+  function renderNode(nodes, depth) {
+    return nodes.map(n => {
+      if(typeof n === 'string') {
+        return `<div style="padding-left:${depth*16}px;color:var(--muted);">└ ${n}</div>`;
+      }
+      const childrenHtml = n.children && n.children.length ? renderNode(n.children, depth+1) : '';
+      const color = depth === 0 ? 'var(--green)' : 'var(--black)';
+      return `<div style="padding-left:${depth*16}px;font-weight:${depth<1?700:600};color:${color};margin-top:${depth===0?10:2}px;">
+        ${depth === 0 ? '📁' : '├'} ${n.name}
+      </div>${childrenHtml}`;
+    }).join('');
+  }
+  wrap.innerHTML = renderNode(categoryTree, 0);
+}
+
+// Sprint 0 Actions
+function buildSprint0() {
+  const wrap = document.getElementById('sprint0-actions');
+  const actions = [
+    { p:'p1', text:'Sortiments-Inventur starten', owner:'Dinova intern', dw:'Woche 1' },
+    { p:'p1', text:'EAN-Status aller Artikel prüfen', owner:'Dinova intern', dw:'Woche 1' },
+    { p:'p1', text:'Entscheidungen E1–E6 abstimmen (Workshop)', owner:'GF + E-Com Manager', dw:'Woche 1–2' },
+    { p:'p1', text:'Kundendaten-Checkliste übergeben', owner:'E-Com Manager', dw:'Woche 1' },
+    { p:'p2', text:'Pilotgruppe (50 Artikel) definieren', owner:'E-Com Manager', dw:'Woche 2' },
+    { p:'p2', text:'Shopify-Account anlegen (Plan-Wahl)', owner:'E-Com Manager', dw:'Woche 2' },
+    { p:'p2', text:'Attributmodell finalisieren', owner:'E-Com Manager', dw:'Woche 2' },
+    { p:'p3', text:'Foto-Briefing erstellen', owner:'E-Com Manager', dw:'Woche 3' },
+    { p:'p2', text:'Kategoriebaum final abstimmen', owner:'E-Com Manager + GF', dw:'Woche 2' },
+  ];
+  wrap.innerHTML = actions.map(a => `
+    <div class="action-row">
+      <div class="action-prio ${a.p}">${a.p.toUpperCase()}</div>
+      <div class="action-text">${a.text}</div>
+      <div class="action-owner">${a.owner}</div>
+      <div class="action-deadline">${a.dw}</div>
+    </div>`).join('');
+}
+
+// Sprint 1 Checklist
+function buildSprint1() {
+  const wrap = document.getElementById('sprint1-checklist');
+  const items = [
+    'Domain verbinden','Theme installieren und konfigurieren','Grundeinstellungen (EUR, DE, Steuer)',
+    'Zahlungsanbieter aktivieren','Versandprofile anlegen','Rechtliche Seiten einfügen (Anwalt!)',
+    'E-Mail-Vorlagen anpassen','Favicon, Logo, Farbschema','Metafields für Attribute anlegen',
+    'Produktdaten-Template erstellen','Content-Briefing Produktfotos','Analytics tracken (GA4)'
+  ];
+  wrap.innerHTML = items.map(i => `
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bg3);">
+      <input type="checkbox" style="accent-color:var(--green);width:15px;height:15px;cursor:pointer;"/>
+      <span style="font-size:13px;">${i}</span>
+    </div>`).join('');
+}
+
+// Dinova Checklist
+function buildDinovaChecklist() {
+  const wrap = document.getElementById('dinova-checklist');
+  const sections = [
+    { label:'Unternehmen', items:['Handelsregister, Steuernummer, USt-ID','Impressumspflichtige Angaben','Bankverbindung für Payment-Onboarding','Bevollmächtigte Person für Account-Eröffnungen','Markenrecht-Status'] },
+    { label:'Sortiment', items:['Vollständige Artikelliste','EAN-Codes / GTINs','Einkaufspreise (netto)','Gewünschte VK-Preise / Margen-Vorgabe','Produktspezifikationen (Maße, Gewicht)','Vorhandene Fotos (+ Nutzungsrechte!)'] },
+    { label:'Logistik', items:['Lagerstandort & -kapazität','Versanddienstleister','Versandkosten-Struktur','Retourenablauf','Umgang mit Bruch/Beschädigung'] },
+    { label:'Branding', items:['Logo-Dateien (Vektor/SVG/PNG)','CI (Farben, Typografie)','Social-Media-Kanäle','Newsletter-Verteiler'] },
+  ];
+  wrap.innerHTML = sections.map(s => `
+    <div style="margin-bottom:14px;">
+      <div style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:6px;">${s.label}</div>
+      ${s.items.map(i => `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bg3);">
+        <input type="checkbox" style="accent-color:var(--green);width:14px;height:14px;cursor:pointer;"/>
+        <span style="font-size:12px;">${i}</span>
+      </div>`).join('')}
+    </div>`).join('');
+}
+
+// Timeline
+function buildTimeline() {
+  const wrap = document.getElementById('timeline-rows');
+  const tl = [
+    { label:'Phase 0', start:0, width:4, status:'active' },
+    { label:'Phase 1', start:2, width:6, status:'future' },
+    { label:'Phase 2', start:5, width:9, status:'future' },
+    { label:'Phase 3', start:11, width:4, status:'future' },
+    { label:'Phase 4', start:9, width:7, status:'future' },
+    { label:'Phase 5', start:16, width:4, status:'future' },
+  ];
+  const total = 20;
+  wrap.innerHTML = tl.map(t => `
+    <div style="display:grid;grid-template-columns:120px 1fr;gap:12px;margin-bottom:10px;align-items:center;">
+      <div style="font-size:12px;font-weight:600;color:var(--black);">${t.label}</div>
+      <div style="position:relative;height:20px;background:var(--bg3);border-radius:999px;">
+        <div style="position:absolute;left:${t.start/total*100}%;width:${t.width/total*100}%;height:100%;border-radius:999px;
+          background:${t.status==='active'?'var(--green)':t.status==='done'?'var(--green-mid)':'var(--border)'};
+          display:flex;align-items:center;justify-content:center;">
+          ${t.status==='active'?'<span style="font-size:10px;font-weight:700;color:white;white-space:nowrap;padding:0 6px;">Aktiv</span>':''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+buildRoadmap();
+buildRisks();
+buildDecisions();
+buildAttributes();
+buildCategoryTree();
+buildSprint0();
+buildSprint1();
+buildDinovaChecklist();
+buildTimeline();
+</script>
 </body>
 </html>
