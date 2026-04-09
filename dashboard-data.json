@@ -1,34 +1,125 @@
 {
-  "projectName": "Dinova E-Commerce Setup",
-  "lastUpdated": "2026-04-09",
-  "currentPhase": "Phase 0 – Foundation & Entscheidungen",
-  "overallProgress": 12,
+  "meta": {
+    "projectName": "Dinova-Saina – E-Commerce Aufbau",
+    "lastUpdated": "2026-04-09",
+    "updatedBy": "E-Com Manager",
+    "currentPhase": "Phase 0 – Foundation & Entscheidungen",
+    "overallProgress": 12,
+    "note": "Diese Datei ist die einzige Datenquelle des Dashboards. Einfach Werte ändern, committen – fertig."
+  },
+
   "milestones": [
-    { "name": "M1 Foundation", "status": "in progress" },
-    { "name": "M2 Shopify Core Setup", "status": "not started" },
-    { "name": "M3 Pilotgruppe content-ready", "status": "not started" },
-    { "name": "M4 Shopify Go-Live ready", "status": "not started" },
-    { "name": "M5 Marktplatzdaten ready", "status": "not started" }
+    { "id": "M1", "name": "M1 – Foundation abgeschlossen",     "status": "in-progress" },
+    { "id": "M2", "name": "M2 – Shopify Core Setup",           "status": "todo" },
+    { "id": "M3", "name": "M3 – Pilotgruppe content-ready",    "status": "todo" },
+    { "id": "M4", "name": "M4 – Shopify Go-Live ready",        "status": "todo" },
+    { "id": "M5", "name": "M5 – Marktplatzdaten ready",        "status": "todo" }
   ],
-  "openDecisions": [
-    "Positionierung: Premium vs. Mid-Market",
-    "B2C only vs. B2C + B2B in Phase 1",
-    "Eigenmarke vs. Fremdmarken vs. Mix",
-    "Lager- und Fulfillment-Modell",
-    "Marktplatz-Priorisierung"
+
+  "decisions": [
+    { "id": "E1", "title": "Positionierung: Premium vs. Mid-Market",   "status": "open",   "notes": "" },
+    { "id": "E2", "title": "B2C only vs. B2C + B2B in Phase 1",        "status": "open",   "notes": "" },
+    { "id": "E3", "title": "Eigenmarke vs. Fremdmarken vs. Mix",        "status": "open",   "notes": "" },
+    { "id": "E4", "title": "Lager- und Fulfillment-Modell",             "status": "open",   "notes": "" },
+    { "id": "E5", "title": "Shopify-Plan & App-Stack",                  "status": "open",   "notes": "" },
+    { "id": "E6", "title": "Marktplatz-Priorisierung",                  "status": "open",   "notes": "" }
   ],
-  "topRisks": [
-    "Unvollständige Produktdaten",
-    "Fehlende EAN/GTINs",
-    "Zu breites Sortiment zum Start",
-    "Schlechte Produktfotografie",
-    "Bruchschäden im Versand"
-  ],
-  "nextActions": [
-    "Sortiments-Inventur starten",
-    "EAN-Status aller Artikel prüfen",
-    "Kundendaten-Checkliste an Dinova senden",
-    "Pilotgruppe mit 20–50 Artikeln definieren",
-    "Attributmodell finalisieren"
+
+  "phases": [
+    {
+      "id": "p0",
+      "label": "Phase 0",
+      "title": "Foundation & Entscheidungen",
+      "weeks": "Wochen 1–4",
+      "tasks": [
+        { "id": "0.1",  "done": false, "title": "Sortimentsaufnahme & -bewertung",           "type": "MUSS", "aufwand": "hoch",   "owner": "Dinova intern",       "deadline": "KW15" },
+        { "id": "0.2",  "done": false, "title": "Strategische Entscheidungen E1–E6 treffen", "type": "MUSS", "aufwand": "mittel", "owner": "GF + E-Com Manager",  "deadline": "KW15" },
+        { "id": "0.3",  "done": false, "title": "Zielkundenprofile definieren",              "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager",       "deadline": "KW16" },
+        { "id": "0.4",  "done": false, "title": "Wettbewerbsanalyse (3–5 Wettbewerber)",    "type": "SOLL", "aufwand": "mittel", "owner": "E-Com Manager",       "deadline": "KW16" },
+        { "id": "0.5",  "done": false, "title": "Kundendaten-Checkliste übergeben",          "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager",       "deadline": "KW15" },
+        { "id": "0.6",  "done": false, "title": "Lieferanten- & Lagersituation klären",      "type": "MUSS", "aufwand": "mittel", "owner": "Dinova intern",       "deadline": "KW16" },
+        { "id": "0.7",  "done": false, "title": "Technologie-Stack final festlegen",         "type": "MUSS", "aufwand": "niedrig","owner": "E-Com Manager",       "deadline": "KW15" },
+        { "id": "0.8",  "done": false, "title": "EAN-Status aller Artikel prüfen",           "type": "MUSS", "aufwand": "mittel", "owner": "Dinova intern",       "deadline": "KW15" },
+        { "id": "0.9",  "done": false, "title": "Pilotgruppe 20–50 Artikel definieren",      "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager",       "deadline": "KW16" },
+        { "id": "0.10", "done": false, "title": "Kategoriebaum finalisieren",                "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager + GF",  "deadline": "KW16" },
+        { "id": "0.11", "done": false, "title": "Attributmodell finalisieren",               "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager",       "deadline": "KW17" }
+      ]
+    },
+    {
+      "id": "p1",
+      "label": "Phase 1",
+      "title": "Shopify Core Setup",
+      "weeks": "Wochen 3–8",
+      "tasks": [
+        { "id": "1.1",  "done": false, "title": "Shopify-Plan wählen + Shop anlegen",              "type": "MUSS", "aufwand": "niedrig", "owner": "E-Com Manager", "deadline": "KW17" },
+        { "id": "1.2",  "done": false, "title": "Theme-Auswahl & Grundkonfiguration",              "type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW18" },
+        { "id": "1.3",  "done": false, "title": "Kategoriebaum in Shopify aufbauen",               "type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW18" },
+        { "id": "1.4",  "done": false, "title": "Attributmodell & Variantenlogik einrichten",      "type": "MUSS", "aufwand": "hoch",    "owner": "E-Com Manager", "deadline": "KW19" },
+        { "id": "1.5",  "done": false, "title": "Erste Produktdaten einpflegen (Pilotgruppe)",     "type": "MUSS", "aufwand": "hoch",    "owner": "E-Com Manager", "deadline": "KW20" },
+        { "id": "1.6",  "done": false, "title": "Zahlungsarten konfigurieren",                    "type": "MUSS", "aufwand": "niedrig", "owner": "E-Com Manager", "deadline": "KW18" },
+        { "id": "1.7",  "done": false, "title": "Versandprofile, Zonen, Tarife",                  "type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW19" },
+        { "id": "1.8",  "done": false, "title": "Rechtliche Seiten (Impressum, AGB, Datenschutz)","type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW19" },
+        { "id": "1.9",  "done": false, "title": "E-Mail-Flows: Bestellung, Versand, Retoure",     "type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW20" },
+        { "id": "1.10", "done": false, "title": "Domain, SSL, technische Grundkonfiguration",     "type": "MUSS", "aufwand": "niedrig", "owner": "E-Com Manager", "deadline": "KW18" },
+        { "id": "1.11", "done": false, "title": "Analytics: GA4, Meta Pixel, Shopify Analytics",  "type": "SOLL", "aufwand": "niedrig", "owner": "E-Com Manager", "deadline": "KW20" },
+        { "id": "1.12", "done": false, "title": "Steuerlogik (DE, EU, OSS) konfigurieren",        "type": "MUSS", "aufwand": "mittel",  "owner": "E-Com Manager", "deadline": "KW19" }
+      ]
+    },
+    {
+      "id": "p2",
+      "label": "Phase 2",
+      "title": "Sortimentsaufbau & Content",
+      "weeks": "Wochen 6–14",
+      "tasks": [
+        { "id": "2.1", "done": false, "title": "Produkt-Priorisierung nach ABC-Logik",         "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW20" },
+        { "id": "2.2", "done": false, "title": "Produktfotos planen & produzieren",            "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager", "deadline": "KW23" },
+        { "id": "2.3", "done": false, "title": "Produkttexte erstellen",                       "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager", "deadline": "KW23" },
+        { "id": "2.4", "done": false, "title": "Vollständige Produktdaten pflegen",            "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager", "deadline": "KW24" },
+        { "id": "2.5", "done": false, "title": "Preislogik finalisieren",                      "type": "MUSS", "aufwand": "mittel", "owner": "GF + E-Com Manager", "deadline": "KW21" },
+        { "id": "2.6", "done": false, "title": "Bestandsführung & Lageranbindung klären",     "type": "MUSS", "aufwand": "mittel", "owner": "Dinova intern", "deadline": "KW21" },
+        { "id": "2.7", "done": false, "title": "SEO-Basis für Produkte & Kategorieseiten",    "type": "SOLL", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW24" },
+        { "id": "2.8", "done": false, "title": "Marken-/Herkunftsinformationen aufbereiten",  "type": "SOLL", "aufwand": "niedrig","owner": "E-Com Manager", "deadline": "KW23" }
+      ]
+    },
+    {
+      "id": "p3",
+      "label": "Phase 3",
+      "title": "Shopify Go-Live",
+      "weeks": "Wochen 12–16",
+      "tasks": [
+        { "id": "3.1", "done": false, "title": "Interne QS: alle Produktseiten, Checkout, Flows", "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW26" },
+        { "id": "3.2", "done": false, "title": "Soft Launch (begrenzter Traffic)",               "type": "SOLL", "aufwand": "niedrig","owner": "E-Com Manager", "deadline": "KW27" },
+        { "id": "3.3", "done": false, "title": "Performance-Review 2 Wochen nach Launch",        "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW29" },
+        { "id": "3.4", "done": false, "title": "Conversion-Optimierung auf Basis erster Daten",  "type": "SOLL", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW30" }
+      ]
+    },
+    {
+      "id": "p4",
+      "label": "Phase 4",
+      "title": "Marktplatzvorbereitung",
+      "weeks": "ab Woche 14",
+      "tasks": [
+        { "id": "4.1", "done": false, "title": "Marktplatz-Priorisierung final",                        "type": "MUSS", "aufwand": "mittel", "owner": "GF + E-Com Manager", "deadline": "KW25" },
+        { "id": "4.2", "done": false, "title": "EAN-Struktur prüfen / GTINs beschaffen",               "type": "MUSS", "aufwand": "mittel", "owner": "Dinova intern",       "deadline": "KW22" },
+        { "id": "4.3", "done": false, "title": "Marktplatz-spezifische Attribute klären",              "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager",       "deadline": "KW25" },
+        { "id": "4.4", "done": false, "title": "Dienstleister-Briefing & techn. Anbindung vorbereiten","type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager",       "deadline": "KW26" },
+        { "id": "4.5", "done": false, "title": "Seller-Accounts anlegen",                             "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager",       "deadline": "KW25" },
+        { "id": "4.6", "done": false, "title": "Content-Anpassung für Marktplatz-Anforderungen",       "type": "SOLL", "aufwand": "hoch",   "owner": "E-Com Manager",       "deadline": "KW28" },
+        { "id": "4.7", "done": false, "title": "Repricing-Logik & Marktplatz-Preise definieren",       "type": "MUSS", "aufwand": "mittel", "owner": "GF + E-Com Manager",  "deadline": "KW27" }
+      ]
+    },
+    {
+      "id": "p5",
+      "label": "Phase 5",
+      "title": "Marktplatz Go-Live & Skalierung",
+      "weeks": "ab Woche 20+",
+      "tasks": [
+        { "id": "5.1", "done": false, "title": "Amazon Launch (Priorität 1)",                   "type": "MUSS", "aufwand": "hoch",   "owner": "E-Com Manager", "deadline": "KW32" },
+        { "id": "5.2", "done": false, "title": "Performance-Monitoring Marktplätze",            "type": "MUSS", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW34" },
+        { "id": "5.3", "done": false, "title": "OTTO / Kaufland Launch",                        "type": "SOLL", "aufwand": "hoch",   "owner": "E-Com Manager", "deadline": "KW36" },
+        { "id": "5.4", "done": false, "title": "Prozessoptimierung & Automatisierung",          "type": "SOLL", "aufwand": "mittel", "owner": "E-Com Manager", "deadline": "KW38" },
+        { "id": "5.5", "done": false, "title": "B2B-Kanal evaluieren (Shopify B2B)",            "type": "KANN", "aufwand": "hoch",   "owner": "GF",            "deadline": "KW40" }
+      ]
+    }
   ]
 }
