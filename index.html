@@ -5,30 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dinova-Saina – E-Commerce Dashboard</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
   :root {
-    --bg: #ffffff;
-    --bg2: #f5f7f5;
-    --bg3: #edf2ed;
-    --green: #2e7d32;
-    --green-light: #4caf50;
-    --green-pale: #e8f5e9;
-    --green-mid: #a5d6a7;
-    --black: #111111;
-    --muted: #6b7280;
-    --border: #d1e7d1;
-    --red: #c62828;
-    --red-pale: #fdecea;
-    --amber: #e65100;
-    --amber-pale: #fff3e0;
-    --blue: #1565c0;
-    --blue-pale: #e3f0ff;
-    --radius: 12px;
-    --shadow: 0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+    --bg:          #ffffff;
+    --bg2:         #f4f7f4;
+    --bg3:         #eaf0ea;
+    --green:       #2e7d32;
+    --green-d:     #1b5e20;
+    --green-l:     #4caf50;
+    --green-pale:  #e8f5e9;
+    --green-mid:   #a5d6a7;
+    --black:       #111111;
+    --muted:       #637063;
+    --border:      #cfe0cf;
+    --red:         #c62828;
+    --red-pale:    #fdecea;
+    --amber:       #e65100;
+    --amber-pale:  #fff3e0;
+    --blue:        #1565c0;
+    --blue-pale:   #e3f0ff;
+    --radius:      12px;
+    --shadow:      0 1px 3px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04);
   }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg2);
@@ -37,42 +38,40 @@
     line-height: 1.6;
   }
 
-  /* ─── HEADER ───────────────────────────────────────────── */
+  /* HEADER */
   .header {
     background: var(--green);
     color: #fff;
-    padding: 0 32px;
+    padding: 0 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 60px;
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    z-index: 200;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
   }
-  .header-logo {
+  .logo {
     font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    letter-spacing: .02em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 20px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .header-logo span { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; opacity: .75; letter-spacing: .08em; text-transform: uppercase; }
-  .header-meta { font-size: 12px; opacity: .8; text-align: right; }
+  .logo-sub { font-family: 'DM Sans', sans-serif; font-size: 11px; opacity: .7; letter-spacing: .1em; text-transform: uppercase; }
+  .header-right { font-size: 12px; opacity: .8; text-align: right; line-height: 1.5; }
+  .header-right strong { opacity: 1; display: block; font-size: 13px; }
 
-  /* ─── NAV TABS ─────────────────────────────────────────── */
-  .nav-wrap {
+  /* NAV */
+  .nav {
     background: var(--bg);
     border-bottom: 2px solid var(--border);
-    padding: 0 32px;
     display: flex;
-    gap: 0;
+    padding: 0 28px;
     overflow-x: auto;
+    gap: 0;
   }
-  .nav-tab {
-    padding: 14px 20px;
+  .nav-btn {
+    padding: 13px 18px;
     cursor: pointer;
     font-weight: 600;
     font-size: 13px;
@@ -80,985 +79,798 @@
     border-bottom: 3px solid transparent;
     margin-bottom: -2px;
     white-space: nowrap;
-    transition: color .2s, border-color .2s;
-    letter-spacing: .02em;
+    transition: color .15s, border-color .15s;
     user-select: none;
+    letter-spacing: .01em;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
   }
-  .nav-tab:hover { color: var(--green); }
-  .nav-tab.active { color: var(--green); border-bottom-color: var(--green); }
+  .nav-btn:hover { color: var(--green); }
+  .nav-btn.active { color: var(--green); border-bottom-color: var(--green); }
 
-  /* ─── MAIN LAYOUT ──────────────────────────────────────── */
-  .main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
-
-  /* ─── PANELS ───────────────────────────────────────────── */
+  /* PANELS */
+  .main { max-width: 1300px; margin: 0 auto; padding: 28px 20px 80px; }
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* ─── SECTION TITLE ────────────────────────────────────── */
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    margin-bottom: 4px;
-    color: var(--black);
-  }
-  .section-sub { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
+  /* TYPOGRAPHY */
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 4px; }
+  .page-sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
 
-  /* ─── GRID LAYOUTS ─────────────────────────────────────── */
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  /* GRIDS */
+  .g4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 14px; margin-bottom: 20px; }
+  .g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr)); gap: 14px; margin-bottom: 20px; }
+  .g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 14px; margin-bottom: 20px; }
 
-  /* ─── CARDS ────────────────────────────────────────────── */
-  .card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  .card-title { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
-  .card-value { font-size: 36px; font-weight: 700; color: var(--green); line-height: 1; }
-  .card-value-sm { font-size: 22px; font-weight: 700; color: var(--black); line-height: 1.2; }
-  .card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  /* CARDS */
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); }
+  .card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
+  .card-big { font-size: 38px; font-weight: 700; line-height: 1; }
+  .card-small { font-size: 20px; font-weight: 700; line-height: 1.2; }
+  .card-hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
 
-  /* ─── PROGRESS BAR ─────────────────────────────────────── */
-  .progress-bar-wrap { background: var(--bg3); border-radius: 999px; height: 8px; margin-top: 10px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: var(--green); border-radius: 999px; transition: width .6s ease; }
+  /* PROGRESS */
+  .pbar-wrap { background: var(--bg3); border-radius: 999px; height: 7px; margin-top: 10px; overflow: hidden; }
+  .pbar { height: 100%; background: var(--green); border-radius: 999px; transition: width .5s ease; }
 
-  /* ─── MILESTONE LIST ───────────────────────────────────── */
-  .milestone-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--bg3);
-  }
-  .milestone-row:last-child { border-bottom: none; }
-  .ms-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .ms-dot.done { background: var(--green); }
-  .ms-dot.progress { background: var(--amber); }
-  .ms-dot.todo { background: var(--border); border: 2px solid var(--muted); }
+  /* BADGES / TAGS */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+  .tag-MUSS, .tag-muss { background: #fce4ec; color: #b71c1c; }
+  .tag-SOLL, .tag-soll { background: var(--amber-pale); color: #bf360c; }
+  .tag-KANN, .tag-kann { background: var(--blue-pale); color: #0d47a1; }
+  .tag-hoch   { background: #fce4ec; color: #b71c1c; }
+  .tag-mittel { background: var(--amber-pale); color: #bf360c; }
+  .tag-niedrig{ background: var(--green-pale); color: var(--green); }
+
+  /* STATUS PILLS */
+  .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill-open   { background: var(--amber-pale); color: var(--amber); }
+  .pill-done   { background: var(--green-pale); color: var(--green); }
+  .pill-active { background: var(--blue-pale); color: var(--blue); }
+
+  /* MILESTONE */
+  .ms-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--bg3); }
+  .ms-row:last-child { border-bottom: none; }
+  .ms-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .ms-dot.done        { background: var(--green); }
+  .ms-dot.in-progress { background: var(--amber); }
+  .ms-dot.todo        { background: var(--border); border: 2px solid var(--muted); }
   .ms-name { flex: 1; font-weight: 500; font-size: 13px; }
-  .ms-status { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
-  .ms-status.done { background: var(--green-pale); color: var(--green); }
-  .ms-status.progress { background: var(--amber-pale); color: var(--amber); }
-  .ms-status.todo { background: var(--bg3); color: var(--muted); }
 
-  /* ─── PHASE ACCORDION ──────────────────────────────────── */
-  .phase-block { margin-bottom: 12px; }
-  .phase-header {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    user-select: none;
-    transition: background .15s;
-  }
-  .phase-header:hover { background: var(--green-pale); }
-  .phase-header.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: var(--border); background: var(--green-pale); }
-  .phase-badge {
-    background: var(--green);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 999px;
-    white-space: nowrap;
-    letter-spacing: .04em;
-  }
-  .phase-title-text { flex: 1; font-weight: 700; font-size: 15px; }
-  .phase-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 16px; }
-  .phase-arrow { font-size: 16px; color: var(--muted); transition: transform .25s; }
-  .phase-header.open .phase-arrow { transform: rotate(180deg); }
+  /* DECISION STATUS */
+  .dec-open   { background: var(--amber-pale); color: var(--amber); }
+  .dec-closed { background: var(--green-pale); color: var(--green); }
 
-  .phase-body {
-    display: none;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 var(--radius) var(--radius);
-    overflow: hidden;
+  /* PHASE ACCORDION */
+  .phase-wrap { margin-bottom: 10px; }
+  .phase-hdr {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: background .12s; user-select: none;
   }
+  .phase-hdr:hover { background: var(--green-pale); }
+  .phase-hdr.open { background: var(--green-pale); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .phase-badge { background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+  .phase-name { flex: 1; font-weight: 700; font-size: 14px; }
+  .phase-meta { font-size: 12px; color: var(--muted); display: flex; gap: 14px; }
+  .phase-arrow { color: var(--muted); font-size: 13px; transition: transform .2s; }
+  .phase-hdr.open .phase-arrow { transform: rotate(180deg); }
+  .phase-body { display: none; background: var(--bg); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
   .phase-body.open { display: block; }
 
-  /* ─── TASK TABLE ───────────────────────────────────────── */
-  .task-table { width: 100%; border-collapse: collapse; }
-  .task-table th {
-    background: var(--bg2);
-    padding: 10px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-  }
-  .task-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--bg3);
-    vertical-align: top;
-    font-size: 13px;
-  }
-  .task-table tr:last-child td { border-bottom: none; }
-  .task-table tr:hover td { background: var(--green-pale); }
+  /* TASK TABLE */
+  .ttable { width: 100%; border-collapse: collapse; }
+  .ttable th { background: var(--bg2); padding: 9px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .ttable td { padding: 11px 14px; border-bottom: 1px solid var(--bg3); vertical-align: middle; font-size: 13px; }
+  .ttable tr:last-child td { border-bottom: none; }
+  .ttable tr:hover td { background: var(--bg2); }
+  .ttable tr.done-row td { opacity: .5; }
+  .ttable tr.done-row .task-title { text-decoration: line-through; }
+  .task-check { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; }
+  .task-owner { font-size: 11px; color: var(--muted); }
+  .task-dl { font-size: 11px; font-weight: 700; background: var(--bg3); padding: 2px 7px; border-radius: 999px; color: var(--muted); }
 
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .03em;
-  }
-  .tag-muss { background: #fce4ec; color: #b71c1c; }
-  .tag-soll { background: var(--amber-pale); color: #bf360c; }
-  .tag-kann { background: var(--blue-pale); color: #0d47a1; }
-  .tag-hoch { background: #fce4ec; color: #b71c1c; }
-  .tag-mittel { background: var(--amber-pale); color: #bf360c; }
-  .tag-niedrig { background: var(--green-pale); color: var(--green); }
+  /* FILTER */
+  .frow { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+  .flabel { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-right: 2px; }
+  .fbtn { padding: 5px 13px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--bg); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .12s; }
+  .fbtn:hover { border-color: var(--green); color: var(--green); }
+  .fbtn.active { background: var(--green); border-color: var(--green); color: #fff; }
 
-  .task-check {
-    width: 16px; height: 16px; accent-color: var(--green); cursor: pointer;
-  }
-
-  /* ─── RISK CARDS ───────────────────────────────────────── */
-  .risk-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--border);
-  }
-  .risk-card.hoch { border-left-color: var(--red); }
+  /* RISK CARDS */
+  .risk-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; background: var(--bg); box-shadow: var(--shadow); border-left: 4px solid var(--border); }
+  .risk-card.hoch   { border-left-color: var(--red); }
   .risk-card.mittel { border-left-color: var(--amber); }
-  .risk-card.niedrig { border-left-color: var(--green-light); }
-  .risk-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-  .risk-title { font-weight: 700; font-size: 14px; }
-  .risk-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
-  .risk-badge.hoch { background: var(--red-pale); color: var(--red); }
-  .risk-badge.mittel { background: var(--amber-pale); color: var(--amber); }
-  .risk-badge.niedrig { background: var(--green-pale); color: var(--green); }
-  .risk-desc { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
-  .risk-measure { font-size: 12px; background: var(--bg2); border-radius: 8px; padding: 8px 12px; color: var(--black); }
-  .risk-measure strong { color: var(--green); }
+  .risk-card.niedrig{ border-left-color: var(--green-l); }
+  .risk-hdr { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+  .risk-id  { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .risk-ttl { font-weight: 700; font-size: 14px; flex: 1; }
+  .risk-badge { font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+  .risk-badge.hoch   { background: var(--red-pale);   color: var(--red); }
+  .risk-badge.mittel { background: var(--amber-pale);  color: var(--amber); }
+  .risk-badge.niedrig{ background: var(--green-pale);  color: var(--green); }
+  .risk-desc { color: var(--muted); font-size: 13px; margin-bottom: 9px; }
+  .risk-action { font-size: 12px; background: var(--bg2); border-radius: 7px; padding: 7px 11px; }
+  .risk-action strong { color: var(--green); }
 
-  /* ─── DECISION CARDS ───────────────────────────────────── */
-  .decision-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  .decision-id { font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
-  .decision-q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
-  .decision-status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
-  .decision-status.open { background: var(--amber-pale); color: var(--amber); }
-  .decision-status.closed { background: var(--green-pale); color: var(--green); }
-  .decision-rec { margin-top: 12px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--bg3); padding-top: 10px; }
-  .decision-rec strong { color: var(--black); }
+  /* DECISION CARDS */
+  .dec-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); }
+  .dec-id { font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .dec-q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .dec-notes { margin-top: 10px; font-size: 12px; color: var(--muted); font-style: italic; border-top: 1px solid var(--bg3); padding-top: 8px; }
 
-  /* ─── NEXT ACTIONS TABLE ───────────────────────────────── */
-  .action-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--bg3);
-  }
-  .action-row:last-child { border-bottom: none; }
-  .action-prio {
-    width: 28px; height: 28px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; flex-shrink: 0;
-  }
-  .action-prio.p1 { background: #fce4ec; color: var(--red); }
-  .action-prio.p2 { background: var(--amber-pale); color: var(--amber); }
-  .action-prio.p3 { background: var(--green-pale); color: var(--green); }
-  .action-text { flex: 1; font-size: 13px; font-weight: 500; }
-  .action-owner { font-size: 12px; color: var(--muted); }
-  .action-deadline { font-size: 11px; font-weight: 700; padding: 2px 8px; background: var(--bg2); border-radius: 999px; color: var(--muted); white-space: nowrap; }
+  /* TIMELINE */
+  .tl-row { display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center; margin-bottom: 9px; }
+  .tl-lbl { font-size: 12px; font-weight: 600; }
+  .tl-track { position: relative; height: 18px; background: var(--bg3); border-radius: 999px; overflow: hidden; }
+  .tl-bar-inner { position: absolute; height: 100%; border-radius: 999px; display: flex; align-items: center; justify-content: center; }
+  .tl-bar-inner span { font-size: 10px; font-weight: 700; color: #fff; padding: 0 7px; white-space: nowrap; }
+  .tl-active { background: var(--green); }
+  .tl-future { background: var(--border); }
 
-  /* ─── FILTER ROW ───────────────────────────────────────── */
-  .filter-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-  .filter-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-right: 4px; }
-  .filter-btn {
-    padding: 5px 14px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--bg);
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .filter-btn:hover { border-color: var(--green); color: var(--green); }
-  .filter-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
+  /* HOW TO EDIT NOTICE */
+  .edit-notice { background: var(--green-pale); border: 1.5px solid var(--green-mid); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 22px; font-size: 13px; }
+  .edit-notice strong { color: var(--green); }
 
-  /* ─── OVERVIEW SPECIFICS ────────────────────────────────── */
-  .open-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 8px 0; border-bottom: 1px solid var(--bg3);
-    font-size: 13px;
-  }
-  .open-item:last-child { border-bottom: none; }
-  .open-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+  /* CHECKLIST in next-steps */
+  .cl-section { margin-bottom: 16px; }
+  .cl-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin-bottom: 6px; }
+  .cl-item { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-bottom: 1px solid var(--bg3); font-size: 13px; }
+  .cl-item:last-child { border-bottom: none; }
+  .cl-item input { accent-color: var(--green); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
 
-  .category-tag {
-    display: inline-block; padding: 3px 10px;
-    background: var(--green-pale); color: var(--green);
-    border-radius: 999px; font-size: 12px; font-weight: 600;
-    margin: 3px;
-  }
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; }
 
-  /* ─── ATTR TABLE ───────────────────────────────────────── */
-  .attr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .attr-table th { background: var(--green); color: #fff; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-  .attr-table td { padding: 9px 12px; border-bottom: 1px solid var(--bg3); vertical-align: top; }
-  .attr-table tr:hover td { background: var(--green-pale); }
-  .check-yes { color: var(--green); font-weight: 700; }
-  .check-no { color: var(--muted); }
+  /* SCROLLABLE */
+  .scroll-x { overflow-x: auto; }
 
-  /* ─── PHASE TIMELINE ────────────────────────────────────── */
-  .timeline { display: flex; gap: 0; margin-bottom: 28px; overflow-x: auto; }
-  .timeline-phase { flex: 1; min-width: 140px; }
-  .tl-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
-  .tl-bar { height: 10px; border-radius: 999px; margin-bottom: 4px; }
-  .tl-bar.done { background: var(--green); }
-  .tl-bar.active { background: repeating-linear-gradient(90deg, var(--green) 0, var(--green) 8px, var(--green-pale) 8px, var(--green-pale) 16px); }
-  .tl-bar.future { background: var(--border); }
-  .tl-weeks { font-size: 11px; color: var(--muted); }
+  /* CATEGORY TREE */
+  .ctree { font-size: 13px; line-height: 1.9; }
+  .ctree-l0 { font-weight: 700; color: var(--green); margin-top: 10px; }
+  .ctree-l1 { padding-left: 16px; font-weight: 600; color: var(--black); }
+  .ctree-l2 { padding-left: 32px; color: var(--muted); }
 
-  /* ─── SCROLLABLE TABLE WRAPPER ──────────────────────────── */
-  .table-scroll { overflow-x: auto; }
+  /* ATTR TABLE */
+  .atable { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .atable th { background: var(--green); color: #fff; padding: 9px 12px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .atable td { padding: 8px 12px; border-bottom: 1px solid var(--bg3); vertical-align: top; }
+  .atable tr:hover td { background: var(--green-pale); }
+  .cy { color: var(--green); font-weight: 700; text-align: center; }
+  .cn { color: var(--border); text-align: center; }
 
-  /* ─── RESPONSIVE ────────────────────────────────────────── */
-  @media(max-width:640px) {
-    .header { padding: 0 16px; }
-    .nav-wrap { padding: 0 16px; }
-    .main { padding: 20px 12px 60px; }
-    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  @media(max-width:600px) {
+    .header { padding: 0 14px; } .nav { padding: 0 14px; }
+    .main { padding: 16px 10px 60px; }
+    .g4, .g3, .g2 { grid-template-columns: 1fr; }
+    .phase-meta { display: none; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-logo">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <rect width="28" height="28" rx="6" fill="rgba(255,255,255,.15)"/>
-      <path d="M7 8h6a7 7 0 0 1 0 14H7V8z" fill="white"/>
-      <circle cx="20" cy="20" r="3" fill="rgba(255,255,255,.6)"/>
+  <div class="logo">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <rect width="30" height="30" rx="7" fill="rgba(255,255,255,.15)"/>
+      <path d="M7 8h7a7.5 7.5 0 010 15H7V8z" fill="white"/>
+      <circle cx="21" cy="21" r="3.5" fill="rgba(255,255,255,.55)"/>
     </svg>
     Dinova-Saina
-    <span>E-Commerce Aufbau</span>
+    <span class="logo-sub">E-Commerce Aufbau</span>
   </div>
-  <div class="header-meta">
-    Stand: April 2026<br/>
-    Phase 0 – Foundation
+  <div class="header-right">
+    <strong id="h-phase">–</strong>
+    <span id="h-updated">–</span>
   </div>
 </div>
 
-<div class="nav-wrap">
-  <div class="nav-tab active" onclick="switchTab('overview')">Übersicht</div>
-  <div class="nav-tab" onclick="switchTab('roadmap')">Roadmap & Aufgaben</div>
-  <div class="nav-tab" onclick="switchTab('risiken')">Risiken</div>
-  <div class="nav-tab" onclick="switchTab('entscheidungen')">Entscheidungen</div>
-  <div class="nav-tab" onclick="switchTab('sortiment')">Sortiment & Attribute</div>
-  <div class="nav-tab" onclick="switchTab('naechste')">Nächste Schritte</div>
-</div>
+<nav class="nav">
+  <button class="nav-btn active" data-tab="overview">Übersicht</button>
+  <button class="nav-btn" data-tab="roadmap">Roadmap & Aufgaben</button>
+  <button class="nav-btn" data-tab="risiken">Risiken</button>
+  <button class="nav-btn" data-tab="entscheidungen">Entscheidungen</button>
+  <button class="nav-btn" data-tab="sortiment">Sortiment & Attribute</button>
+  <button class="nav-btn" data-tab="naechste">Nächste Schritte</button>
+</nav>
 
 <div class="main">
 
-<!-- ═══════════════════════════════ OVERVIEW ═══════════════════════════════ -->
-<div class="panel active" id="panel-overview">
-  <div class="section-title">Projektübersicht</div>
-  <div class="section-sub">Dinova-Saina – Digitaler Vertriebsaufbau von Grund auf. Shopify + Marktplätze.</div>
+<!-- EDIT NOTICE (shown always) -->
+<div class="edit-notice" id="edit-notice">
+  💡 <strong>So aktualisierst du das Dashboard:</strong>
+  Öffne <code>dashboard-data.json</code> auf GitHub → Stift-Icon (Bearbeiten) → Werte ändern (z.B. <code>"done": true</code>) → Commit → fertig. Sichtbar für alle in ~1–2 Minuten.
+</div>
 
-  <div class="grid-4">
+<!-- ══ ÜBERSICHT ══════════════════════════════════════════ -->
+<div class="panel active" id="tab-overview">
+  <div class="page-title">Projektübersicht</div>
+  <div class="page-sub">Gesamtstatus, Milestones und offene Entscheidungen auf einen Blick.</div>
+
+  <div class="g4">
     <div class="card">
-      <div class="card-title">Gesamtfortschritt</div>
-      <div class="card-value">12%</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:12%"></div></div>
-      <div class="card-sub">Phase 0 aktiv</div>
+      <div class="card-label">Gesamtfortschritt</div>
+      <div class="card-big" id="ov-progress" style="color:var(--green)">–</div>
+      <div class="pbar-wrap"><div class="pbar" id="ov-pbar" style="width:0%"></div></div>
+      <div class="card-hint" id="ov-phase-hint">–</div>
     </div>
     <div class="card">
-      <div class="card-title">Offene Entscheidungen</div>
-      <div class="card-value" style="color:#e65100">6</div>
-      <div class="card-sub">Müssen vor Umsetzung getroffen werden</div>
+      <div class="card-label">Aufgaben erledigt</div>
+      <div class="card-big" id="ov-tasks-done" style="color:var(--green-d)">–</div>
+      <div class="card-hint" id="ov-tasks-hint">von gesamt</div>
     </div>
     <div class="card">
-      <div class="card-title">Top-Risiken aktiv</div>
-      <div class="card-value" style="color:#c62828">10</div>
-      <div class="card-sub">davon 4 mit hoher Wahrscheinlichkeit</div>
+      <div class="card-label">Offene Entscheidungen</div>
+      <div class="card-big" id="ov-dec-open" style="color:var(--amber)">–</div>
+      <div class="card-hint">Müssen zuerst getroffen werden</div>
     </div>
     <div class="card">
-      <div class="card-title">Aufgaben gesamt</div>
-      <div class="card-value">32</div>
-      <div class="card-sub">Phasen 0–5</div>
+      <div class="card-label">Letztes Update</div>
+      <div class="card-small" id="ov-updated">–</div>
+      <div class="card-hint" id="ov-updatedby">–</div>
     </div>
   </div>
 
-  <!-- Milestone Progress -->
-  <div class="grid-2">
+  <div class="g2">
     <div class="card">
-      <div class="card-title">Milestones</div>
-      <div class="milestone-row">
-        <div class="ms-dot progress"></div>
-        <div class="ms-name">M1 – Foundation abgeschlossen</div>
-        <div class="ms-status progress">In Arbeit</div>
-      </div>
-      <div class="milestone-row">
-        <div class="ms-dot todo"></div>
-        <div class="ms-name">M2 – Shopify Core Setup</div>
-        <div class="ms-status todo">Offen</div>
-      </div>
-      <div class="milestone-row">
-        <div class="ms-dot todo"></div>
-        <div class="ms-name">M3 – Pilotgruppe content-ready</div>
-        <div class="ms-status todo">Offen</div>
-      </div>
-      <div class="milestone-row">
-        <div class="ms-dot todo"></div>
-        <div class="ms-name">M4 – Shopify Go-Live ready</div>
-        <div class="ms-status todo">Offen</div>
-      </div>
-      <div class="milestone-row">
-        <div class="ms-dot todo"></div>
-        <div class="ms-name">M5 – Marktplatzdaten ready</div>
-        <div class="ms-status todo">Offen</div>
-      </div>
+      <div class="card-label">Milestones</div>
+      <div id="ov-milestones"></div>
     </div>
-
     <div class="card">
-      <div class="card-title">Offene Entscheidungen</div>
-      <div class="open-item"><div class="open-dot"></div>E1 – Positionierung: Premium vs. Mid-Market</div>
-      <div class="open-item"><div class="open-dot"></div>E2 – B2C only vs. B2C + B2B in Phase 1</div>
-      <div class="open-item"><div class="open-dot"></div>E3 – Eigenmarke vs. Fremdmarken vs. Mix</div>
-      <div class="open-item"><div class="open-dot"></div>E4 – Lager- und Fulfillment-Modell</div>
-      <div class="open-item"><div class="open-dot"></div>E5 – Shopify-Plan & App-Stack</div>
-      <div class="open-item"><div class="open-dot"></div>E6 – Marktplatz-Priorisierung</div>
+      <div class="card-label">Offene Entscheidungen</div>
+      <div id="ov-decisions"></div>
     </div>
   </div>
 
-  <!-- Phase Timeline -->
-  <div class="card" style="margin-bottom:24px;">
-    <div class="card-title" style="margin-bottom:16px;">Zeitplan-Übersicht (vereinfacht)</div>
-    <div style="overflow-x:auto;">
-      <div style="display:grid; grid-template-columns: 120px repeat(20,1fr); gap:0; min-width:600px;">
-        <!-- header -->
-        <div style="font-size:11px;color:var(--muted);font-weight:700;padding-bottom:8px;"></div>
-        <div style="grid-column:2/22; display:flex; margin-bottom:8px;">
-          <div style="flex:4;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 1–4</div>
-          <div style="flex:6;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 5–10</div>
-          <div style="flex:6;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 11–16</div>
-          <div style="flex:4;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.05em;font-weight:700;">WO 17+</div>
-        </div>
-      </div>
-      <div id="timeline-rows"></div>
-    </div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-label" style="margin-bottom:14px;">Zeitplan – Phasenübersicht</div>
+    <div id="ov-timeline"></div>
   </div>
 
-  <!-- Quick Stats Row -->
-  <div class="grid-3">
+  <div class="g3">
     <div class="card">
-      <div class="card-title">Kritischer Pfad</div>
-      <div style="font-size:13px;line-height:2;">
-        <span class="category-tag">Sortimentsaufnahme</span>
-        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
-        <span class="category-tag">Attributmodell</span>
-        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
-        <span class="category-tag">Produktdaten</span>
-        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
-        <span class="category-tag">Shopify-Setup</span>
-        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
-        <span class="category-tag">Content</span>
-        <span style="color:var(--muted);font-size:18px;vertical-align:middle;"> → </span>
-        <span class="category-tag">Launch</span>
+      <div class="card-label">Kritischer Pfad</div>
+      <div style="font-size:13px;margin-top:4px;line-height:2.2;">
+        <span class="tag tag-MUSS">Sortimentsaufnahme</span> →
+        <span class="tag tag-MUSS">Attributmodell</span> →
+        <span class="tag tag-MUSS">Produktdaten</span> →
+        <span class="tag tag-MUSS">Shopify-Setup</span> →
+        <span class="tag tag-MUSS">Content</span> →
+        <span class="tag" style="background:var(--green);color:#fff;">Launch</span>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Marktplatz-Priorität</div>
-      <div style="font-size:13px;line-height:2.2;">
-        <span style="font-weight:700;color:var(--green);">① Amazon</span><span style="color:var(--muted);font-size:12px;"> – Höchste Reichweite</span><br/>
-        <span style="font-weight:700;color:var(--black);">② OTTO</span><span style="color:var(--muted);font-size:12px;"> – Stärke bei Wohnen/Haushalt</span><br/>
-        <span style="font-weight:700;color:var(--black);">③ Kaufland</span><span style="color:var(--muted);font-size:12px;"> – Einfacher Einstieg</span><br/>
-        <span style="font-weight:700;color:var(--muted);">④ Wayfair</span><span style="color:var(--muted);font-size:12px;"> – Phase 3+</span>
+      <div class="card-label">Marktplatz-Priorität</div>
+      <div style="font-size:13px;margin-top:4px;line-height:2.3;">
+        <span style="font-weight:800;color:var(--green)">① Amazon</span> <span style="color:var(--muted);font-size:12px;">Reichweite, Prime</span><br>
+        <span style="font-weight:700">② OTTO</span> <span style="color:var(--muted);font-size:12px;">Stärke Wohnen/Haushalt</span><br>
+        <span style="font-weight:700">③ Kaufland</span> <span style="color:var(--muted);font-size:12px;">Einfacher Einstieg</span><br>
+        <span style="font-weight:600;color:var(--muted)">④ Wayfair</span> <span style="color:var(--muted);font-size:12px;">Phase 3+</span>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Sofort-Maßnahmen (diese Woche)</div>
-      <div style="font-size:13px;line-height:2;">
-        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">1</div>&nbsp;Sortiments-Inventur starten</div>
-        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">2</div>&nbsp;EAN-Status aller Artikel prüfen</div>
-        <div class="open-item"><div class="action-prio p1" style="display:inline-flex;width:20px;height:20px;font-size:11px;">3</div>&nbsp;Entscheidungen E1–E6 abstimmen</div>
-        <div class="open-item"><div class="action-prio p2" style="display:inline-flex;width:20px;height:20px;font-size:11px;">4</div>&nbsp;Pilotgruppe 50 Artikel definieren</div>
-        <div class="open-item"><div class="action-prio p2" style="display:inline-flex;width:20px;height:20px;font-size:11px;">5</div>&nbsp;Attributmodell finalisieren</div>
-      </div>
+      <div class="card-label">Fortschritt je Phase</div>
+      <div id="ov-phase-progress" style="margin-top:4px;"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════ ROADMAP ════════════════════════════════ -->
-<div class="panel" id="panel-roadmap">
-  <div class="section-title">Roadmap & Aufgaben</div>
-  <div class="section-sub">Alle Arbeitspakete nach Phase. Typ (MUSS/SOLL/KANN) und Aufwand sind markiert.</div>
+<!-- ══ ROADMAP ════════════════════════════════════════════ -->
+<div class="panel" id="tab-roadmap">
+  <div class="page-title">Roadmap & Aufgaben</div>
+  <div class="page-sub">Alle Arbeitspakete nach Phase. <code>"done": true</code> in der JSON = abgehakt.</div>
 
-  <div class="filter-row">
-    <span class="filter-label">Typ:</span>
-    <button class="filter-btn active" onclick="filterTasks('all',this)">Alle</button>
-    <button class="filter-btn" onclick="filterTasks('muss',this)">MUSS</button>
-    <button class="filter-btn" onclick="filterTasks('soll',this)">SOLL</button>
-    <button class="filter-btn" onclick="filterTasks('kann',this)">KANN</button>
+  <div class="frow">
+    <span class="flabel">Typ:</span>
+    <button class="fbtn active" onclick="setFilter('all',this)">Alle</button>
+    <button class="fbtn" onclick="setFilter('MUSS',this)">MUSS</button>
+    <button class="fbtn" onclick="setFilter('SOLL',this)">SOLL</button>
+    <button class="fbtn" onclick="setFilter('KANN',this)">KANN</button>
   </div>
-
-  <div id="phase-accordions"></div>
+  <div id="rm-phases"></div>
 </div>
 
-<!-- ═══════════════════════════════ RISIKEN ═══════════════════════════════ -->
-<div class="panel" id="panel-risiken">
-  <div class="section-title">Risikoregister</div>
-  <div class="section-sub">Identifizierte Risiken mit Eintrittswahrscheinlichkeit, Auswirkung und Gegenmaßnahmen.</div>
+<!-- ══ RISIKEN ════════════════════════════════════════════ -->
+<div class="panel" id="tab-risiken">
+  <div class="page-title">Risikoregister</div>
+  <div class="page-sub">10 identifizierte Risiken mit Eintrittswahrscheinlichkeit und Gegenmaßnahmen.</div>
 
-  <div class="filter-row">
-    <span class="filter-label">Wahrscheinlichkeit:</span>
-    <button class="filter-btn active" onclick="filterRisks('all',this)">Alle</button>
-    <button class="filter-btn" onclick="filterRisks('hoch',this)">Hoch</button>
-    <button class="filter-btn" onclick="filterRisks('mittel',this)">Mittel</button>
-    <button class="filter-btn" onclick="filterRisks('niedrig',this)">Niedrig</button>
+  <div class="frow">
+    <span class="flabel">Wahrscheinlichkeit:</span>
+    <button class="fbtn active" onclick="filterRisks('all',this)">Alle</button>
+    <button class="fbtn" onclick="filterRisks('hoch',this)">Hoch</button>
+    <button class="fbtn" onclick="filterRisks('mittel',this)">Mittel</button>
   </div>
-
-  <div id="risk-grid" class="grid-2"></div>
+  <div id="risk-grid" class="g2"></div>
 </div>
 
-<!-- ════════════════════════════ ENTSCHEIDUNGEN ═══════════════════════════ -->
-<div class="panel" id="panel-entscheidungen">
-  <div class="section-title">Strategische Entscheidungen</div>
-  <div class="section-sub">Diese 6 Entscheidungen müssen getroffen werden, BEVOR operative Arbeit beginnt. Jede offene Entscheidung ist ein Risiko für Nacharbeit.</div>
+<!-- ══ ENTSCHEIDUNGEN ═════════════════════════════════════ -->
+<div class="panel" id="tab-entscheidungen">
+  <div class="page-title">Strategische Entscheidungen</div>
+  <div class="page-sub">Diese Entscheidungen müssen getroffen werden, bevor operative Arbeit beginnt.</div>
 
-  <div id="decisions-grid" class="grid-2"></div>
+  <div id="dec-grid" class="g2"></div>
 </div>
 
-<!-- ════════════════════════════ SORTIMENT & ATTRIBUTE ═══════════════════ -->
-<div class="panel" id="panel-sortiment">
-  <div class="section-title">Sortiment, Kategorien & Attribute</div>
-  <div class="section-sub">Kategoriebaum, Attributmodell und Variantenlogik für Shopify und Marktplätze.</div>
+<!-- ══ SORTIMENT ══════════════════════════════════════════ -->
+<div class="panel" id="tab-sortiment">
+  <div class="page-title">Sortiment, Kategorien & Attribute</div>
+  <div class="page-sub">Kategoriebaum, Attributmodell und Variantenlogik für Shopify und Marktplätze.</div>
 
-  <div class="grid-2">
-    <!-- Kategoriebaum -->
+  <div class="g2">
     <div class="card">
-      <div class="card-title">Kategoriebaum (Vorschlag)</div>
-      <div id="category-tree" style="font-size:13px;line-height:1.8;"></div>
+      <div class="card-label">Kategoriebaum</div>
+      <div class="ctree" id="cat-tree"></div>
     </div>
-    <!-- Variantenlogik -->
     <div class="card">
-      <div class="card-title">Variantenlogik (Shopify)</div>
-      <div class="table-scroll">
-        <table class="attr-table" style="font-size:12px;">
-          <thead><tr><th>Variantentyp</th><th>Beispiel</th><th>Umsetzung</th></tr></thead>
+      <div class="card-label">Variantenlogik (Shopify)</div>
+      <div class="scroll-x">
+        <table class="atable">
+          <thead><tr><th>Typ</th><th>Beispiel</th><th>Umsetzung</th></tr></thead>
           <tbody>
             <tr><td>Farbe</td><td>Weiß / Creme / Blau</td><td>Variant: Farbe</td></tr>
-            <tr><td>Größe / Menge</td><td>21cm / 26cm / 28cm</td><td>Variant: Größe</td></tr>
-            <tr><td>Set-Größe</td><td>2er / 4er / 6er-Set</td><td>Variant: Menge</td></tr>
-            <tr><td>Material</td><td>Bone China / Porzellan</td><td>Eigener Artikel ❌</td></tr>
+            <tr><td>Größe</td><td>21 / 26 / 28 cm</td><td>Variant: Größe</td></tr>
+            <tr><td>Set-Größe</td><td>2er / 4er / 6er</td><td>Variant: Menge</td></tr>
+            <tr><td>Material</td><td>Bone China / Porz.</td><td>Eigener Artikel ⚠</td></tr>
             <tr><td>Dekor</td><td>Uni / Blumendekor</td><td>Variant: Design</td></tr>
           </tbody>
         </table>
       </div>
-      <div style="margin-top:14px;padding:12px;background:var(--green-pale);border-radius:8px;font-size:12px;color:var(--green);">
-        <strong>Grundregel:</strong> Max. 2 Variantenebenen pro Produkt. Drei Ebenen = UX-Problem + Verwaltungskomplexität.
+      <div style="margin-top:12px;padding:11px;background:var(--green-pale);border-radius:8px;font-size:12px;">
+        <strong style="color:var(--green)">Regel:</strong> Max. 2 Variantenebenen. Drei Ebenen = UX-Problem.
       </div>
-      <div style="margin-top:10px;padding:12px;background:var(--amber-pale);border-radius:8px;font-size:12px;color:var(--amber);">
-        <strong>Eigenständige Artikel (keine Variante):</strong> Unterschiedliche Materialien · Unterschiedliche Kategorien · Komplett anderes Bildset · Preis-Abweichung >40%
+      <div style="margin-top:8px;padding:11px;background:var(--amber-pale);border-radius:8px;font-size:12px;">
+        <strong style="color:var(--amber)">Eigenständige Artikel (keine Variante):</strong><br>
+        Unterschiedliche Materialien · Anderes Bildset · Preisabweichung &gt;40%
       </div>
     </div>
   </div>
 
-  <!-- Attributmodell -->
   <div class="card">
-    <div class="card-title">Kern-Attributmodell (alle Artikel)</div>
-    <div class="table-scroll">
-      <table class="attr-table">
-        <thead>
-          <tr><th>Attribut</th><th>Beispiel</th><th>Pflicht?</th><th>Shop</th><th>Amazon</th><th>OTTO</th></tr>
-        </thead>
-        <tbody id="attr-table-body"></tbody>
+    <div class="card-label">Kern-Attributmodell (alle Artikel)</div>
+    <div class="scroll-x">
+      <table class="atable">
+        <thead><tr><th>Attribut</th><th>Beispielwert</th><th>Pflicht</th><th>Shop</th><th>Amazon</th><th>OTTO</th></tr></thead>
+        <tbody id="attr-body"></tbody>
       </table>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════ NÄCHSTE SCHRITTE ════════════════════════ -->
-<div class="panel" id="panel-naechste">
-  <div class="section-title">Nächste Schritte & Sofortmaßnahmen</div>
-  <div class="section-sub">Priorisierte Handlungsliste. P1 = diese Woche, P2 = diese Phase, P3 = später.</div>
+<!-- ══ NÄCHSTE SCHRITTE ═══════════════════════════════════ -->
+<div class="panel" id="tab-naechste">
+  <div class="page-title">Nächste Schritte & Sofortmaßnahmen</div>
+  <div class="page-sub">P1 = diese Woche · P2 = diese Phase · P3 = nächste Phase</div>
 
-  <div class="grid-2">
+  <div class="g2">
     <div class="card">
-      <div class="card-title">Sprint 0 – Sofortmaßnahmen (Woche 1–2)</div>
-      <div id="sprint0-actions"></div>
+      <div class="card-label">Sprint 0 – Sofortmaßnahmen</div>
+      <div id="sprint0"></div>
     </div>
     <div class="card">
-      <div class="card-title">Checkliste: Was muss Dinova liefern?</div>
-      <div id="dinova-checklist"></div>
+      <div class="card-label">Was muss Dinova liefern? (Checkliste)</div>
+      <div id="dinova-cl"></div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title">Sprint 1 – Shopify-Basis Checkliste (Woche 3–6)</div>
-    <div id="sprint1-checklist" style="column-count:2;column-gap:32px;"></div>
+    <div class="card-label">Sprint 1 – Shopify-Basis Checkliste</div>
+    <div id="sprint1" style="columns:2;column-gap:28px;"></div>
   </div>
 </div>
 
 </div><!-- /main -->
 
 <script>
-// ══════════════════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════════════════
-
-const phases = [
-  {
-    id:'p0', label:'Phase 0', title:'Foundation & Entscheidungen', weeks:'Wochen 1–4',
-    status:'active', tasks:[
-      { id:'0.1', title:'Sortimentsaufnahme & -bewertung', type:'MUSS', aufwand:'hoch', detail:'Vollständige Liste aller Artikel mit Basisdaten. Excel/Google Sheet.' },
-      { id:'0.2', title:'Strategische Entscheidungen E1–E6 treffen', type:'MUSS', aufwand:'mittel', detail:'Workshop mit GF. Output: Entscheidungsprotokoll (1 Seite).' },
-      { id:'0.3', title:'Zielkundenprofile definieren (B2C, ggf. B2B)', type:'MUSS', aufwand:'mittel', detail:'2–3 konkrete Zielkunden-Personas.' },
-      { id:'0.4', title:'Wettbewerbsanalyse (3–5 direkte Wettbewerber)', type:'SOLL', aufwand:'mittel', detail:'Online-Shops, Marktplatzpräsenz, Preislogik, Content-Qualität.' },
-      { id:'0.5', title:'Kundendaten-Checkliste übergeben', type:'MUSS', aufwand:'hoch', detail:'Unternehmensdaten, Sortimentsdaten, Logistik, Branding, Technisches.' },
-      { id:'0.6', title:'Lieferanten-, Einkaufs- und Lagersituation klären', type:'MUSS', aufwand:'mittel', detail:'Alle Lieferanten, MOQs, Lieferzeiten, Lagerort & -kapazität.' },
-      { id:'0.7', title:'Technologie-Stack final festlegen', type:'MUSS', aufwand:'niedrig', detail:'Shopify-Plan, App-Stack, Middleware, PIM (falls nötig).' },
-      { id:'0.8', title:'EAN-Status aller Artikel prüfen', type:'MUSS', aufwand:'mittel', detail:'Ohne EAN kein Amazon/OTTO-Listing. GTINs bei GS1 Germany beantragen.' },
-      { id:'0.9', title:'Pilotgruppe 20–50 Artikel definieren', type:'MUSS', aufwand:'mittel', detail:'Hohe Marge/Fotos vorhanden/EAN vorhanden/Repräsentativ.' },
-      { id:'0.10', title:'Kategoriebaum finalisieren', type:'MUSS', aufwand:'mittel', detail:'Max. 3 Ebenen, SEO-gerecht, marktplatzkompatibel.' },
-      { id:'0.11', title:'Attributmodell finalisieren', type:'MUSS', aufwand:'hoch', detail:'Pflichtfelder für Shop + Marktplätze. Einmal richtig – Änderungen sind teuer.' },
-    ]
-  },
-  {
-    id:'p1', label:'Phase 1', title:'Shopify Core Setup', weeks:'Wochen 3–8',
-    status:'todo', tasks:[
-      { id:'1.1', title:'Shopify-Plan wählen + Shop anlegen', type:'MUSS', aufwand:'niedrig', detail:'Basic vs. Shopify Plan. Abhängig von Budget und B2B-Bedarf.' },
-      { id:'1.2', title:'Theme-Auswahl & Grundkonfiguration', type:'MUSS', aufwand:'mittel', detail:'Premium-Theme empfohlen. EUR, DE, Steuerlogik.' },
-      { id:'1.3', title:'Kategoriebaum in Shopify aufbauen', type:'MUSS', aufwand:'mittel', detail:'Collections anlegen, Navigation konfigurieren.' },
-      { id:'1.4', title:'Attributmodell & Variantenlogik definieren', type:'MUSS', aufwand:'hoch', detail:'Metafields für Shopify anlegen.' },
-      { id:'1.5', title:'Erste Produktdaten einpflegen (Pilotgruppe)', type:'MUSS', aufwand:'hoch', detail:'20–50 Artikel vollständig mit allen Attributen.' },
-      { id:'1.6', title:'Zahlungsarten konfigurieren', type:'MUSS', aufwand:'niedrig', detail:'Klarna, PayPal, Kreditkarte, Vorkasse.' },
-      { id:'1.7', title:'Versandprofile, Zonen, Tarife', type:'MUSS', aufwand:'mittel', detail:'DE, EU, ggf. Weltweite Versandzonen.' },
-      { id:'1.8', title:'Rechtliche Seiten: Impressum, AGB, Datenschutz, Widerruf', type:'MUSS', aufwand:'mittel', detail:'IT-Recht Kanzlei oder Händlerbund. Kein Copy-Paste!' },
-      { id:'1.9', title:'E-Mail-Flows: Bestellbestätigung, Versand, Retoure', type:'MUSS', aufwand:'mittel', detail:'Shopify Standard-Flows anpassen.' },
-      { id:'1.10', title:'Domain, SSL, technische Grundkonfiguration', type:'MUSS', aufwand:'niedrig', detail:'' },
-      { id:'1.11', title:'Analytics: GA4, Meta Pixel, Shopify Analytics', type:'SOLL', aufwand:'niedrig', detail:'Von Anfang an sauber tracken.' },
-      { id:'1.12', title:'Steuerlogik (DE, EU, OSS) konfigurieren', type:'MUSS', aufwand:'mittel', detail:'Steuerberater konsultieren.' },
-    ]
-  },
-  {
-    id:'p2', label:'Phase 2', title:'Sortimentsaufbau & Content', weeks:'Wochen 6–14',
-    status:'todo', tasks:[
-      { id:'2.1', title:'Produkt-Priorisierung nach ABC-Logik', type:'MUSS', aufwand:'mittel', detail:'A = Launch, B = Q2, C = später.' },
-      { id:'2.2', title:'Produktfotos planen & produzieren', type:'MUSS', aufwand:'hoch', detail:'Briefing erstellen. Weißer HG + Lifestyle + Details. Min. 3–5 Bilder/Artikel.' },
-      { id:'2.3', title:'Produkttexte erstellen', type:'MUSS', aufwand:'hoch', detail:'Titel, Beschreibung, Bullet Points. SEO-optimiert.' },
-      { id:'2.4', title:'Vollständige Produktdaten pflegen', type:'MUSS', aufwand:'hoch', detail:'Alle Pflichtattribute für Shop + Marktplätze.' },
-      { id:'2.5', title:'Preislogik finalisieren', type:'MUSS', aufwand:'mittel', detail:'UVP, Aktionspreis, B2B-Preis, Marktplatz-Preis.' },
-      { id:'2.6', title:'Bestandsführung & Lageranbindung klären', type:'MUSS', aufwand:'mittel', detail:'Single Source of Truth für Bestände definieren.' },
-      { id:'2.7', title:'SEO-Basis für Produkte & Kategorieseiten', type:'SOLL', aufwand:'mittel', detail:'Meta Titles, Descriptions, H1-Struktur.' },
-      { id:'2.8', title:'Marken-/Herkunftsinformationen aufbereiten', type:'SOLL', aufwand:'niedrig', detail:'Storytelling-Elemente für Premium-Positionierung.' },
-    ]
-  },
-  {
-    id:'p3', label:'Phase 3', title:'Shopify Go-Live', weeks:'Wochen 12–16',
-    status:'todo', tasks:[
-      { id:'3.1', title:'Interne QS: alle Produktseiten, Checkout, Flows', type:'MUSS', aufwand:'mittel', detail:'QS-Checkliste abarbeiten.' },
-      { id:'3.2', title:'Soft Launch (begrenzter Traffic)', type:'SOLL', aufwand:'niedrig', detail:'Freundes-/Familienkreis, dann langsam ausweiten.' },
-      { id:'3.3', title:'Performance-Review 2 Wochen nach Launch', type:'MUSS', aufwand:'mittel', detail:'Conversion, Bounce Rate, Warenkorb-Abbrüche.' },
-      { id:'3.4', title:'Conversion-Optimierung auf Basis erster Daten', type:'SOLL', aufwand:'mittel', detail:'' },
-    ]
-  },
-  {
-    id:'p4', label:'Phase 4', title:'Marktplatzvorbereitung', weeks:'ab Woche 14',
-    status:'todo', tasks:[
-      { id:'4.1', title:'Marktplatz-Priorisierung final (Amazon, OTTO, Kaufland)', type:'MUSS', aufwand:'mittel', detail:'' },
-      { id:'4.2', title:'EAN-Struktur prüfen / GTINs beschaffen', type:'MUSS', aufwand:'mittel', detail:'GS1 Germany. Lead Time: 2–4 Wochen.' },
-      { id:'4.3', title:'Marktplatz-spezifische Attribut-Anforderungen klären', type:'MUSS', aufwand:'hoch', detail:'Amazon Browse-Nodes, OTTO-Kategorien, Kaufland-Felder.' },
-      { id:'4.4', title:'Dienstleister-Briefing & techn. Anbindung vorbereiten', type:'MUSS', aufwand:'mittel', detail:'Middleware-Konzept. Shopify als Single Source of Truth.' },
-      { id:'4.5', title:'Seller-Accounts anlegen', type:'MUSS', aufwand:'mittel', detail:'Amazon Seller Central, OTTO Market, Kaufland Seller.' },
-      { id:'4.6', title:'Content-Anpassung für Marktplatz-Anforderungen', type:'SOLL', aufwand:'hoch', detail:'Amazon-spezifische Bullet Points, A+ Content, OTTO-Texte.' },
-      { id:'4.7', title:'Repricing-Logik & Marktplatz-Preise definieren', type:'MUSS', aufwand:'mittel', detail:'Preisparität beachten. Marktplatz-Gebühren einkalkulieren.' },
-    ]
-  },
-  {
-    id:'p5', label:'Phase 5', title:'Marktplatz Go-Live & Skalierung', weeks:'ab Woche 20+',
-    status:'todo', tasks:[
-      { id:'5.1', title:'Amazon Launch (Priorität 1)', type:'MUSS', aufwand:'hoch', detail:'' },
-      { id:'5.2', title:'Performance-Monitoring Marktplätze', type:'MUSS', aufwand:'mittel', detail:'' },
-      { id:'5.3', title:'OTTO / Kaufland Launch', type:'SOLL', aufwand:'hoch', detail:'' },
-      { id:'5.4', title:'Prozessoptimierung & Automatisierung', type:'SOLL', aufwand:'mittel', detail:'' },
-      { id:'5.5', title:'B2B-Kanal evaluieren (Shopify B2B)', type:'KANN', aufwand:'hoch', detail:'Nur wenn B2B-Umsatz signifikant.' },
-    ]
-  }
-];
+// ═══════════════════════════ STATIC DATA ══════════════════════
 
 const risks = [
-  { id:'R1', title:'Fehlende oder schlechte Produktdaten', prob:'hoch', desc:'Maße, Gewichte, EANs fehlen. Shopify-Setup verzögert sich. Marktplatz-Onboarding scheitert.', measure:'Datenerhebung als erstes Arbeitspaket. Template erstellen, systematisch befüllen.' },
-  { id:'R2', title:'Fehlende EAN/GTINs', prob:'hoch', desc:'Artikel ohne EAN können auf Amazon und OTTO nicht gelistet werden.', measure:'Sofort prüfen. EANs bei GS1 Germany beantragen. Lead Time: 2–4 Wochen.' },
-  { id:'R3', title:'Unklare Positionierung – falsche Preissetzung', prob:'mittel', desc:'Preise werden inkonsistent gesetzt. Margenprobleme, Vertrauensverlust.', measure:'Entscheidung E1 vor Preisgestaltung treffen.' },
-  { id:'R4', title:'Zu breites Sortiment im Start', prob:'hoch', desc:'Qualitätsprobleme bei Content, Fotos, Lagerführung.', measure:'Harte Pilotgruppe: max. 50 Artikel in Phase 1.' },
-  { id:'R5', title:'Schlechte Produktfotos', prob:'hoch', desc:'Porzellan und Glas sind schwierig zu fotografieren. Niedrige Conversion, höhere Retouren.', measure:'Professioneller Fotograf mit Erfahrung Geschirr/Glas. Klares Briefing erstellen.' },
-  { id:'R6', title:'Versandprobleme mit Bruch-Ware', prob:'mittel', desc:'Porzellan, Glas und Opalglas sind fragil. Hohe Bruchquote bei schlechter Verpackung.', measure:'Verpackungskonzept früh entwickeln. Testversand vor Launch. Klare SOP.' },
-  { id:'R7', title:'Zu frühe Marktplatz-Anbindung', prob:'mittel', desc:'Gleichzeitig 3 Marktplätze neben dem Shop. Doppelter Aufwand, Datenfehler, Überverkäufe.', measure:'Sequenzielle Reihenfolge: Shopify stabil → Marktplatz 1 → Marktplatz 2.' },
-  { id:'R8', title:'Daten-Silo Shopify / Marktplätze', prob:'mittel', desc:'Bestände, Preise, Produktdaten werden manuell gepflegt. Fehler häufen sich.', measure:'Frühzeitig Middleware/PIM mit Dienstleister klären. Shopify als Single Source of Truth.' },
-  { id:'R9', title:'Rechtliche Lücken', prob:'mittel', desc:'Impressum, AGB, Datenschutz, Widerruf, Preisangabenverordnung nicht korrekt.', measure:'Rechtstexte von IT-Recht Kanzlei oder Händlerbund beziehen. Kein Copy-Paste.' },
-  { id:'R10', title:'Kapazitätsunterschätzung Content', prob:'hoch', desc:'Guter Produktcontent (Text + Bild + Attribute) für 200+ Artikel ist ein Vollzeit-Projekt.', measure:'Realistische Kapazitätsplanung. Content-Sprint mit Tagzielen. Externe Texter/Fotografen.' },
+  { id:'R1',  prob:'hoch',   title:'Fehlende oder schlechte Produktdaten',       desc:'Maße, Gewichte, EANs fehlen. Shopify-Setup verzögert sich. Marktplatz-Onboarding scheitert.',                    action:'Datenerhebung als erstes AP. Template erstellen, systematisch befüllen.' },
+  { id:'R2',  prob:'hoch',   title:'Fehlende EAN/GTINs',                         desc:'Ohne EAN kein Listing auf Amazon oder OTTO. Ausnahme-Anträge kosten Zeit.',                                        action:'Sofort prüfen. GTINs bei GS1 Germany beantragen. Lead Time: 2–4 Wochen.' },
+  { id:'R3',  prob:'mittel', title:'Unklare Positionierung → falsche Preise',    desc:'Preise werden inkonsistent gesetzt. Margenprobleme, Vertrauensverlust, Preisparität-Konflikte auf Marktplätzen.', action:'E1 (Positionierung) vor Preisgestaltung treffen.' },
+  { id:'R4',  prob:'hoch',   title:'Zu breites Sortiment im Start',              desc:'Qualitätsprobleme bei Content, Fotos, Lagerführung. Nichts ist wirklich gut.',                                    action:'Max. 50 Artikel in Phase 1. Rest kommt in Phase 2.' },
+  { id:'R5',  prob:'hoch',   title:'Schlechte Produktfotos',                     desc:'Porzellan und Glas sind schwer zu fotografieren. Niedrige Conversion, höhere Retourenquote.',                    action:'Professioneller Fotograf mit Geschirr/Glas-Erfahrung. Klares Briefing.' },
+  { id:'R6',  prob:'mittel', title:'Bruchschäden im Versand',                    desc:'Fragile Ware + schlechte Verpackung = hohe Bruchquote, Retouren, negative Reviews.',                            action:'Verpackungskonzept früh entwickeln. Testversand vor Launch. SOP erstellen.' },
+  { id:'R7',  prob:'mittel', title:'Zu frühe Marktplatz-Anbindung',              desc:'3 Marktplätze parallel zum Shop = doppelter Aufwand, Datenfehler, Überverkäufe.',                              action:'Shopify stabil → Marktplatz 1 → Marktplatz 2. Sequenziell.' },
+  { id:'R8',  prob:'mittel', title:'Daten-Silo Shopify / Marktplätze',           desc:'Bestände und Preise manuell gepflegt = Fehler häufen sich schnell.',                                            action:'Middleware/PIM frühzeitig klären. Shopify als Single Source of Truth.' },
+  { id:'R9',  prob:'mittel', title:'Rechtliche Lücken',                          desc:'Impressum, AGB, Widerruf, Datenschutz nicht korrekt → Abmahnrisiko Deutschland.',                              action:'Rechtstexte von IT-Recht Kanzlei oder Händlerbund. Kein Copy-Paste.' },
+  { id:'R10', prob:'hoch',   title:'Kapazitätsunterschätzung Content',           desc:'Guter Content für 200+ Artikel ist ein Vollzeit-Projekt. Wird regelmäßig unterschätzt.',                       action:'Realistische Planung. Content-Sprint mit Tagzielen. Externe Texter/Fotografen.' },
 ];
 
-const decisions = [
-  {
-    id:'E1', q:'Positionierung im Markt – Premium, Mid-Market oder Preis?',
-    status:'open', rec:'Premium (Bone China, Qualitätsmarken) empfohlen: höhere Margen, bessere Differenzierung, weniger Preiskampf. Bone China und Opalglas stützen diese Entscheidung.',
-    impact:'Direkte Auswirkung auf Content-Anforderungen, Preissetzung, Zielgruppenstrategie, Theme-Wahl.'
-  },
-  {
-    id:'E2', q:'B2C vs. B2B – Scope Phase 1?',
-    status:'open', rec:'Phase 1 rein B2C (Shopify Standard) empfohlen. Weniger Komplexität. B2B erst in Phase 2+ wenn aktive B2B-Kunden vorhanden und umsatzrelevant.',
-    impact:'Hat Dinova-Saina bereits aktive B2B-Kunden? Welcher Anteil am Umsatz?'
-  },
-  {
-    id:'E3', q:'Eigenmarke vs. Fremdartikel vs. Mix?',
-    status:'open', rec:'Kritisch für EAN-Strategie und Amazon-Listings. Bei Eigenmarke: eigene GTINs bei GS1 registrieren. Bei Fremdmarken: EAN vom Hersteller.',
-    impact:'Direkte Auswirkung auf Produktdaten-Aufwand, Bildrechte, EAN-Vergabe, Amazon-Listings.'
-  },
-  {
-    id:'E4', q:'Lager- und Fulfillment-Strategie?',
-    status:'open', rec:'Eigenlager bietet Kontrolle und Marge. 3PL ist skalierbar, aber kostenpflichtiger. Dropshipping birgt Lieferzeitrisiken (kritisch für Marktplätze).',
-    impact:'Fundamentale Auswirkung auf Preisgestaltung, Lieferzeiten und Marktplatz-Bewertungen.'
-  },
-  {
-    id:'E5', q:'Shopify-Plan & App-Stack?',
-    status:'open', rec:'MUSS-Apps: Klaviyo, Sufio/Order Printer Pro, Matrixify. SOLL: Tidio/Gorgias. KANN: Loox/Judge.me, Bundles-App.',
-    impact:'Abhängig von Budget und internen Ressourcen. App-Kosten addieren sich schnell.'
-  },
-  {
-    id:'E6', q:'Marktplatz-Priorisierung?',
-    status:'open', rec:'Empfehlung: 1. Amazon (Reichweite), 2. OTTO (Wohnen-Stärke, höhere Margen), 3. Kaufland (einfacher Einstieg), 4. Wayfair (Phase 3+).',
-    impact:'Abhängig von Kategorie-Zugängen, EAN-Verfügbarkeit, Ressourcen und Fulfillment-Modell.'
-  },
-];
-
-const attributes = [
-  ['Produkttitel','Bone China Teller 28cm, weiß','MUSS',true,true,true],
-  ['Marke / Brand','Dinova / Maxwell & Williams','MUSS',true,true,true],
-  ['EAN / GTIN','4012345678901','MUSS',true,true,true],
-  ['SKU (intern)','DS-TEL-28-WH','MUSS',true,true,true],
-  ['Material','Bone China','MUSS',true,true,true],
-  ['Farbe','Weiß','MUSS',true,true,true],
-  ['Maße (L×B×H cm)','28 × 28 × 2,5','MUSS',true,true,true],
-  ['Gewicht (g)','420','MUSS',true,true,true],
-  ['Spülmaschinenfest','ja / nein','MUSS',true,true,true],
-  ['Mikrowellengeeignet','ja / nein','MUSS',true,true,true],
-  ['Set-Inhalt / Menge','1 Stück / 6er-Set','MUSS',true,true,true],
-  ['Herstellungsland','Portugal / China','MUSS',true,true,true],
-  ['Einkaufspreis (netto)','intern','MUSS',false,false,false],
-  ['UVP / VK-Preis (brutto)','29,95 €','MUSS',true,true,true],
-  ['Bestand','aktuell / dauerhaft','MUSS',true,true,true],
-  ['Kurzbeschreibung (3–5 Bullets)','…','MUSS',true,true,true],
-  ['Langbeschreibung (200–500 Wörter)','…','MUSS',true,true,false],
-  ['Bild-URLs (min. 3)','https://…','MUSS',true,true,true],
+const decisionsStatic = [
+  { id:'E1', q:'Positionierung im Markt – Premium, Mid-Market oder Preis?',  rec:'Premium (Bone China, Qualitätsmarken) empfohlen. Höhere Margen, bessere Differenzierung, weniger Preiskampf.', impact:'Direkte Auswirkung auf Content, Preissetzung, Theme-Wahl, Zielgruppe.' },
+  { id:'E2', q:'B2C vs. B2B – Scope Phase 1?',                               rec:'Phase 1 rein B2C empfohlen. Weniger Komplexität. B2B erst in Phase 2+, wenn aktive Kunden vorhanden.', impact:'Hat Dinova aktive B2B-Kunden? Welcher Anteil am Umsatz?' },
+  { id:'E3', q:'Eigenmarke vs. Fremdmarken vs. Mix?',                         rec:'Kritisch für EAN-Strategie. Bei Eigenmarke: GTINs bei GS1 registrieren. Bei Fremdmarken: EAN vom Hersteller.', impact:'Produktdaten-Aufwand, Bildrechte, EAN-Vergabe, Amazon-Listings.' },
+  { id:'E4', q:'Lager- und Fulfillment-Strategie?',                          rec:'Eigenlager = Kontrolle & Marge. 3PL = skalierbar. Dropshipping = Lieferzeitrisiko für Marktplätze.', impact:'Fundamentale Auswirkung auf Preisgestaltung und Lieferzeiten.' },
+  { id:'E5', q:'Shopify-Plan & App-Stack?',                                   rec:'MUSS: Klaviyo, Sufio/Order Printer Pro, Matrixify. SOLL: Tidio/Gorgias. KANN: Loox/Judge.me.', impact:'App-Kosten addieren sich. Abhängig von Budget und internen Ressourcen.' },
+  { id:'E6', q:'Marktplatz-Priorisierung?',                                   rec:'1. Amazon (Reichweite), 2. OTTO (Wohnen-Stärke), 3. Kaufland (einfach), 4. Wayfair (Phase 3+).', impact:'Abhängig von EAN-Verfügbarkeit, Kategorie-Zugängen und Ressourcen.' },
 ];
 
 const categoryTree = [
-  { name:'Tischkultur', children:[
-    { name:'Geschirr', children:['Komplettservice','Teller (Speise, Suppe, Dessert)','Schüsseln & Schalen','Platten & Servierplatten','Zubehör (Saucieren, Terrinen)'] },
-    { name:'Gläser & Trinkgefäße', children:['Opalglas','Weingläser','Wassergläser','Sektgläser','Becher & Tassen'] },
-    { name:'Besteck', children:['Besteck-Sets','Einzelteile','Servierbesteck'] },
-    { name:'Tischaccessoires', children:['Tischläufer & -decken','Servietten','Kerzen & Kerzenhalter'] },
+  { l0:'Tischkultur', l1:[
+    { n:'Geschirr', l2:['Komplettservice','Teller (Speise, Suppe, Dessert)','Schüsseln & Schalen','Platten & Servierplatten','Zubehör (Saucieren, Terrinen)'] },
+    { n:'Gläser & Trinkgefäße', l2:['Opalglas','Weingläser','Wassergläser','Sektgläser','Becher & Tassen'] },
+    { n:'Besteck', l2:['Besteck-Sets','Einzelteile','Servierbesteck'] },
+    { n:'Tischaccessoires', l2:['Tischläufer & -decken','Servietten','Kerzen & Kerzenhalter'] },
   ]},
-  { name:'Wohnkultur', children:[
-    { name:'Vasen & Deko', children:[] },
-    { name:'Schalen & Dekoschalen', children:[] },
-    { name:'Bilderrahmen', children:[] },
-    { name:'Wohnaccessoires', children:[] },
+  { l0:'Wohnkultur', l1:[
+    { n:'Vasen & Dekorationsobjekte', l2:[] },
+    { n:'Schalen & Dekoschalen', l2:[] },
+    { n:'Bilderrahmen', l2:[] },
+    { n:'Wohnaccessoires', l2:[] },
   ]},
-  { name:'Sets & Kollektionen', children:[
-    { name:'Geschenksets', children:[] },
-    { name:'Komplettservice', children:[] },
-    { name:'Saisonale Kollektionen', children:[] },
+  { l0:'Sets & Kollektionen', l1:[
+    { n:'Geschenksets', l2:[] },
+    { n:'Komplettservice', l2:[] },
+    { n:'Saisonale Kollektionen', l2:[] },
   ]},
-  { name:'Sale', children:[] },
+  { l0:'Sale', l1:[] },
 ];
 
-// ══════════════════════════════════════════════════════════
-// RENDERING
-// ══════════════════════════════════════════════════════════
+const attrs = [
+  ['Produkttitel','Bone China Teller 28cm, weiß','MUSS',1,1,1],
+  ['Marke / Brand','Dinova / Maxwell & Williams','MUSS',1,1,1],
+  ['EAN / GTIN','4012345678901','MUSS',1,1,1],
+  ['SKU (intern)','DS-TEL-28-WH','MUSS',1,1,1],
+  ['Material','Bone China','MUSS',1,1,1],
+  ['Farbe','Weiß','MUSS',1,1,1],
+  ['Maße (L×B×H cm)','28 × 28 × 2,5','MUSS',1,1,1],
+  ['Gewicht (g)','420','MUSS',1,1,1],
+  ['Spülmaschinenfest','ja / nein','MUSS',1,1,1],
+  ['Mikrowellengeeignet','ja / nein','MUSS',1,1,1],
+  ['Set-Inhalt / Menge','1 Stk. / 6er-Set','MUSS',1,1,1],
+  ['Herstellungsland','Portugal / China','MUSS',1,1,1],
+  ['Einkaufspreis (netto)','intern','MUSS',0,0,0],
+  ['UVP / VK-Preis (brutto)','29,95 €','MUSS',1,1,1],
+  ['Bestand','aktuell / dauerhaft','MUSS',1,1,1],
+  ['Kurzbeschreibung (3–5 Bullets)','…','MUSS',1,1,1],
+  ['Langbeschreibung (200–500 Wörter)','…','MUSS',1,1,0],
+  ['Bild-URLs (min. 3)','https://…','MUSS',1,1,1],
+];
 
-function switchTab(id) {
-  document.querySelectorAll('.nav-tab').forEach((t,i)=> t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('panel-'+id).classList.add('active');
+const sprint0 = [
+  { p:'P1', text:'Sortiments-Inventur starten',                owner:'Dinova intern',      dl:'KW 15' },
+  { p:'P1', text:'EAN-Status aller Artikel prüfen',            owner:'Dinova intern',      dl:'KW 15' },
+  { p:'P1', text:'Entscheidungen E1–E6 abstimmen (Workshop)',  owner:'GF + E-Com Manager', dl:'KW 15–16' },
+  { p:'P1', text:'Kundendaten-Checkliste übergeben',           owner:'E-Com Manager',      dl:'KW 15' },
+  { p:'P2', text:'Pilotgruppe (50 Artikel) definieren',        owner:'E-Com Manager',      dl:'KW 16' },
+  { p:'P2', text:'Shopify-Account anlegen (Plan wählen)',      owner:'E-Com Manager',      dl:'KW 16' },
+  { p:'P2', text:'Attributmodell finalisieren',                owner:'E-Com Manager',      dl:'KW 16' },
+  { p:'P2', text:'Kategoriebaum final abstimmen',              owner:'E-Com Manager + GF', dl:'KW 16' },
+  { p:'P3', text:'Foto-Briefing erstellen',                    owner:'E-Com Manager',      dl:'KW 17' },
+];
+
+const dinovaChecklist = [
+  { grp:'Unternehmen',  items:['Handelsregister, Steuernummer, USt-ID','Impressumspflichtige Angaben vollständig','Bankverbindung für Payment-Onboarding','Bevollmächtigte Person für Accounts (Amazon, OTTO, Kaufland)','Markenrecht-Status'] },
+  { grp:'Sortiment',    items:['Vollständige Artikelliste (alle lieferbaren Artikel)','EAN-Codes / GTINs (oder: nicht vorhanden)','Einkaufspreise (netto, je Lieferant)','Gewünschte VK-Preise oder Margen-Vorgabe','Produktspezifikationen (Maße, Gewicht, Material)','Vorhandene Fotos + Nutzungsrechte klären'] },
+  { grp:'Logistik',     items:['Lagerstandort und -kapazität','Aktuelle Versanddienstleister (DHL, GLS etc.)','Versandkosten-Struktur','Retourenablauf','Umgang mit Bruch/Beschädigung bei Versand'] },
+  { grp:'Branding',     items:['Logo-Dateien (Vektordatei / SVG / PNG)','CI (Farben, Typografie) falls vorhanden','Social-Media-Kanäle vorhanden?','Newsletter-Verteiler vorhanden?'] },
+];
+
+const sprint1 = [
+  'Domain verbinden','Theme installieren & konfigurieren',
+  'Grundeinstellungen (EUR, DE, Steuer)','Zahlungsanbieter aktivieren',
+  'Versandprofile anlegen','Rechtliche Seiten einfügen (Anwalt prüfen!)',
+  'E-Mail-Vorlagen anpassen','Favicon, Logo, Farbschema',
+  'Metafields für Attribute anlegen','Produktdaten-Template erstellen',
+  'Foto-Briefing fertigstellen','Analytics einrichten (GA4)'
+];
+
+// ═══════════════════════════ TIMELINE DATA ════════════════════
+const tlData = [
+  { label:'Phase 0', left:0,   width:20,  active:true },
+  { label:'Phase 1', left:10,  width:30,  active:false },
+  { label:'Phase 2', left:25,  width:45,  active:false },
+  { label:'Phase 3', left:55,  width:20,  active:false },
+  { label:'Phase 4', left:45,  width:35,  active:false },
+  { label:'Phase 5', left:80,  width:20,  active:false },
+];
+
+// ═══════════════════════════ STATE ════════════════════════════
+let D = null;
+let currentFilter = 'all';
+
+// ═══════════════════════════ INIT ═════════════════════════════
+fetch('./data/dashboard-data.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    D = data;
+    renderAll();
+  })
+  .catch(() => {
+    document.getElementById('edit-notice').innerHTML =
+      '⚠️ <strong>dashboard-data.json nicht gefunden.</strong> Stelle sicher, dass die Datei unter <code>data/dashboard-data.json</code> liegt.';
+  });
+
+function renderAll() {
+  renderHeader();
+  renderOverview();
+  renderRoadmap();
+  renderRisks();
+  renderDecisions();
+  renderSortiment();
+  renderNextSteps();
 }
 
-// Roadmap
-let currentFilter = 'all';
-function buildRoadmap() {
-  const wrap = document.getElementById('phase-accordions');
+// ─── HEADER ───────────────────────────────────────────────────
+function renderHeader() {
+  document.getElementById('h-phase').textContent = D.meta.currentPhase;
+  document.getElementById('h-updated').textContent = 'Stand: ' + D.meta.lastUpdated;
+}
+
+// ─── OVERVIEW ─────────────────────────────────────────────────
+function renderOverview() {
+  const { meta, milestones, decisions, phases } = D;
+
+  document.getElementById('ov-progress').textContent = meta.overallProgress + '%';
+  document.getElementById('ov-pbar').style.width = meta.overallProgress + '%';
+  document.getElementById('ov-phase-hint').textContent = meta.currentPhase;
+  document.getElementById('ov-updated').textContent = meta.lastUpdated;
+  document.getElementById('ov-updatedby').textContent = 'by ' + (meta.updatedBy || '–');
+
+  // tasks done
+  const allTasks = phases.flatMap(p => p.tasks);
+  const doneTasks = allTasks.filter(t => t.done).length;
+  document.getElementById('ov-tasks-done').textContent = doneTasks;
+  document.getElementById('ov-tasks-hint').textContent = 'von ' + allTasks.length + ' Aufgaben erledigt';
+
+  // decisions open
+  const decOpen = decisions.filter(d => d.status === 'open').length;
+  document.getElementById('ov-dec-open').textContent = decOpen;
+
+  // milestones
+  const msWrap = document.getElementById('ov-milestones');
+  msWrap.innerHTML = milestones.map(m => {
+    const labels = { 'done':'Erledigt', 'in-progress':'In Arbeit', 'todo':'Offen' };
+    const pillCls = m.status === 'done' ? 'pill-done' : m.status === 'in-progress' ? 'pill-active' : 'pill-open';
+    return `<div class="ms-row">
+      <div class="ms-dot ${m.status}"></div>
+      <div class="ms-name">${m.name}</div>
+      <span class="pill ${pillCls}">${labels[m.status]||m.status}</span>
+    </div>`;
+  }).join('');
+
+  // decisions
+  const decWrap = document.getElementById('ov-decisions');
+  decWrap.innerHTML = decisions.map(d => {
+    const cls = d.status === 'open' ? 'pill-open' : 'pill-done';
+    const label = d.status === 'open' ? '⚠ Offen' : '✓ Entschieden';
+    const note = d.notes ? `<div style="font-size:11px;color:var(--muted);margin-top:2px;">${d.notes}</div>` : '';
+    return `<div class="ms-row">
+      <div class="ms-dot ${d.status === 'open' ? 'in-progress' : 'done'}"></div>
+      <div class="ms-name" style="font-size:13px;">${d.id} – ${d.title}</div>
+      <span class="pill ${cls}" style="font-size:11px;">${label}</span>
+    </div>${note}`;
+  }).join('');
+
+  // timeline
+  const tlWrap = document.getElementById('ov-timeline');
+  tlWrap.innerHTML = tlData.map(t =>
+    `<div class="tl-row">
+      <div class="tl-lbl">${t.label}</div>
+      <div class="tl-track">
+        <div class="tl-bar-inner ${t.active ? 'tl-active' : 'tl-future'}"
+          style="left:${t.left}%;width:${t.width}%;">
+          ${t.active ? '<span>Aktiv</span>' : ''}
+        </div>
+      </div>
+    </div>`
+  ).join('');
+
+  // phase progress bars
+  const ppWrap = document.getElementById('ov-phase-progress');
+  ppWrap.innerHTML = phases.map(ph => {
+    const done = ph.tasks.filter(t => t.done).length;
+    const total = ph.tasks.length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    return `<div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">
+        <span style="font-weight:600;">${ph.label}</span>
+        <span style="color:var(--muted);">${done}/${total}</span>
+      </div>
+      <div class="pbar-wrap"><div class="pbar" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ─── ROADMAP ──────────────────────────────────────────────────
+function renderRoadmap() {
+  const wrap = document.getElementById('rm-phases');
   wrap.innerHTML = '';
-  phases.forEach(ph => {
-    const tasks = currentFilter === 'all' ? ph.tasks : ph.tasks.filter(t => t.type.toLowerCase() === currentFilter);
-    if(!tasks.length && currentFilter !== 'all') return;
-    const done = tasks.filter(t => document.getElementById('chk-'+t.id)?.checked).length;
+  D.phases.forEach(ph => {
+    const tasks = currentFilter === 'all' ? ph.tasks : ph.tasks.filter(t => t.type === currentFilter);
+    const doneCnt = ph.tasks.filter(t => t.done).length;
+
     const block = document.createElement('div');
-    block.className = 'phase-block';
+    block.className = 'phase-wrap';
     block.innerHTML = `
-      <div class="phase-header" onclick="togglePhase('${ph.id}')">
+      <div class="phase-hdr" id="hdr-${ph.id}" onclick="togglePhase('${ph.id}')">
         <span class="phase-badge">${ph.label}</span>
-        <span class="phase-title-text">${ph.title}</span>
-        <span class="phase-meta">
+        <span class="phase-name">${ph.title}</span>
+        <div class="phase-meta">
           <span>⏱ ${ph.weeks}</span>
-          <span>${tasks.length} Aufgaben</span>
-        </span>
+          <span>${doneCnt}/${ph.tasks.length} erledigt</span>
+        </div>
         <span class="phase-arrow">▼</span>
       </div>
       <div class="phase-body" id="body-${ph.id}">
-        <div class="table-scroll">
-          <table class="task-table">
-            <thead><tr><th style="width:36px"></th><th style="width:60px">#</th><th>Aufgabe</th><th style="width:80px">Typ</th><th style="width:90px">Aufwand</th></tr></thead>
-            <tbody>
-              ${tasks.map(t => `
-                <tr>
-                  <td><input type="checkbox" class="task-check" id="chk-${t.id}" onchange="updateProgress()"/></td>
-                  <td style="color:var(--muted);font-weight:600;">${t.id}</td>
-                  <td>
-                    <div style="font-weight:600;">${t.title}</div>
-                    ${t.detail ? `<div style="color:var(--muted);font-size:12px;margin-top:2px;">${t.detail}</div>` : ''}
-                  </td>
-                  <td><span class="tag tag-${t.type.toLowerCase()}">${t.type}</span></td>
+        ${tasks.length === 0
+          ? '<div class="empty">Keine Aufgaben für diesen Filter.</div>'
+          : `<div class="scroll-x"><table class="ttable">
+              <thead><tr>
+                <th style="width:36px"></th>
+                <th style="width:54px">#</th>
+                <th>Aufgabe</th>
+                <th style="width:75px">Typ</th>
+                <th style="width:85px">Aufwand</th>
+                <th>Owner</th>
+                <th>Deadline</th>
+              </tr></thead>
+              <tbody>${tasks.map(t => `
+                <tr class="${t.done ? 'done-row' : ''}">
+                  <td><input type="checkbox" class="task-check" ${t.done ? 'checked' : ''} disabled title="Ändern: dashboard-data.json → done: true"/></td>
+                  <td style="color:var(--muted);font-weight:600;font-size:12px;">${t.id}</td>
+                  <td><span class="task-title">${t.title}</span></td>
+                  <td><span class="tag tag-${t.type}">${t.type}</span></td>
                   <td><span class="tag tag-${t.aufwand}">${t.aufwand}</span></td>
+                  <td class="task-owner">${t.owner||'–'}</td>
+                  <td><span class="task-dl">${t.deadline||'–'}</span></td>
                 </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table></div>`
+        }
       </div>`;
     wrap.appendChild(block);
   });
-  // open phase 0 by default
-  const p0 = document.querySelector('.phase-header');
-  if(p0 && !document.getElementById('body-p0')?.classList.contains('open')) {
-    p0.classList.add('open');
-    document.getElementById('body-p0').classList.add('open');
-  }
+  // auto-open Phase 0
+  openPhase('p0');
 }
 
 function togglePhase(id) {
-  const header = event.currentTarget;
+  const hdr = document.getElementById('hdr-'+id);
   const body = document.getElementById('body-'+id);
-  header.classList.toggle('open');
-  body.classList.toggle('open');
+  if(!hdr || !body) return;
+  const isOpen = hdr.classList.contains('open');
+  hdr.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+function openPhase(id) {
+  const hdr = document.getElementById('hdr-'+id);
+  const body = document.getElementById('body-'+id);
+  if(!hdr || !body) return;
+  hdr.classList.add('open');
+  body.classList.add('open');
 }
 
-function filterTasks(f, btn) {
+function setFilter(f, btn) {
   currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  buildRoadmap();
+  renderRoadmap();
+  openPhase('p0');
 }
 
-function updateProgress() {
-  const all = document.querySelectorAll('.task-check').length;
-  const done = document.querySelectorAll('.task-check:checked').length;
-  const pct = all ? Math.round(done/all*100) : 0;
-  // update overview cards if visible
-}
-
-// Risks
-function buildRisks() {
-  const grid = document.getElementById('risk-grid');
-  grid.innerHTML = '';
+// ─── RISKS ────────────────────────────────────────────────────
+function renderRisks() {
+  const wrap = document.getElementById('risk-grid');
+  wrap.innerHTML = '';
   risks.forEach(r => {
     const card = document.createElement('div');
     card.className = `risk-card ${r.prob}`;
     card.dataset.prob = r.prob;
     card.innerHTML = `
-      <div class="risk-header">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span style="font-weight:800;color:var(--muted);font-size:12px;">${r.id}</span>
-          <span class="risk-title">${r.title}</span>
+      <div class="risk-hdr">
+        <div>
+          <span class="risk-id">${r.id}</span>
+          <div class="risk-ttl">${r.title}</div>
         </div>
         <span class="risk-badge ${r.prob}">${r.prob.charAt(0).toUpperCase()+r.prob.slice(1)}</span>
       </div>
       <div class="risk-desc">${r.desc}</div>
-      <div class="risk-measure"><strong>Gegenmaßnahme:</strong> ${r.measure}</div>`;
-    grid.appendChild(card);
+      <div class="risk-action"><strong>Gegenmaßnahme:</strong> ${r.action}</div>`;
+    wrap.appendChild(card);
   });
 }
 
 function filterRisks(f, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#tab-risiken .fbtn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.risk-card').forEach(c => {
-    c.style.display = (f === 'all' || c.dataset.prob === f) ? 'block' : 'none';
+    c.style.display = (f === 'all' || c.dataset.prob === f) ? '' : 'none';
   });
 }
 
-// Decisions
-function buildDecisions() {
-  const grid = document.getElementById('decisions-grid');
-  grid.innerHTML = '';
-  decisions.forEach(d => {
-    const card = document.createElement('div');
-    card.className = 'decision-card';
-    card.innerHTML = `
-      <div class="decision-id">${d.id}</div>
-      <div class="decision-q">${d.q}</div>
-      <span class="decision-status ${d.status}">
-        ${d.status === 'open' ? '⚠️ Offen – muss geklärt werden' : '✅ Entschieden'}
-      </span>
-      <div class="decision-rec">
-        <strong>Empfehlung:</strong> ${d.rec}<br/>
-        <span style="color:var(--amber);font-size:12px;margin-top:6px;display:block;">⚡ ${d.impact}</span>
-      </div>`;
-    grid.appendChild(card);
-  });
+// ─── DECISIONS ────────────────────────────────────────────────
+function renderDecisions() {
+  const wrap = document.getElementById('dec-grid');
+  const statusMap = {};
+  D.decisions.forEach(d => { statusMap[d.id] = d; });
+
+  wrap.innerHTML = decisionsStatic.map(ds => {
+    const live = statusMap[ds.id] || {};
+    const status = live.status || 'open';
+    const notes = live.notes || '';
+    const pillClass = status === 'open' ? 'dec-open' : 'dec-closed';
+    const pillLabel = status === 'open' ? '⚠ Offen – klären!' : '✓ Entschieden';
+    return `<div class="dec-card">
+      <div class="dec-id">${ds.id}</div>
+      <div class="dec-q">${ds.q}</div>
+      <span class="pill ${pillClass}">${pillLabel}</span>
+      <div class="dec-notes">
+        <strong>Empfehlung:</strong> ${ds.rec}<br>
+        <span style="color:var(--amber);font-size:12px;margin-top:4px;display:block;">⚡ ${ds.impact}</span>
+        ${notes ? `<div style="margin-top:8px;padding:8px;background:var(--green-pale);border-radius:7px;color:var(--green);font-style:normal;"><strong>Notiz:</strong> ${notes}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// Attributes
-function buildAttributes() {
-  const tbody = document.getElementById('attr-table-body');
-  tbody.innerHTML = '';
-  attributes.forEach(([attr,ex,pflicht,shop,amazon,otto]) => {
-    const yes = '<span class="check-yes">✓</span>';
-    const no = '<span class="check-no">–</span>';
-    const row = document.createElement('tr');
-    row.innerHTML = `
+// ─── SORTIMENT ────────────────────────────────────────────────
+function renderSortiment() {
+  // Category tree
+  const ctWrap = document.getElementById('cat-tree');
+  ctWrap.innerHTML = categoryTree.map(c =>
+    `<div class="ctree-l0">📁 ${c.l0}</div>
+    ${c.l1.map(l1 =>
+      `<div class="ctree-l1">├ ${l1.n}</div>
+      ${(l1.l2||[]).map(l2 => `<div class="ctree-l2">└ ${l2}</div>`).join('')}`
+    ).join('')}`
+  ).join('');
+
+  // Attributes
+  const tbody = document.getElementById('attr-body');
+  tbody.innerHTML = attrs.map(([attr,ex,pfl,shop,amz,otto]) =>
+    `<tr>
       <td><strong>${attr}</strong></td>
       <td style="color:var(--muted);font-size:12px;">${ex}</td>
-      <td><span class="tag tag-${pflicht.toLowerCase()}">${pflicht}</span></td>
-      <td style="text-align:center;">${shop?yes:no}</td>
-      <td style="text-align:center;">${amazon?yes:no}</td>
-      <td style="text-align:center;">${otto?yes:no}</td>`;
-    tbody.appendChild(row);
+      <td><span class="tag tag-${pfl}">${pfl}</span></td>
+      <td class="${shop?'cy':'cn'}">${shop?'✓':'–'}</td>
+      <td class="${amz?'cy':'cn'}">${amz?'✓':'–'}</td>
+      <td class="${otto?'cy':'cn'}">${otto?'✓':'–'}</td>
+    </tr>`
+  ).join('');
+}
+
+// ─── NEXT STEPS ───────────────────────────────────────────────
+function renderNextSteps() {
+  // Sprint 0
+  document.getElementById('sprint0').innerHTML = sprint0.map(a => {
+    const cls = a.p === 'P1' ? 'tag-hoch' : a.p === 'P2' ? 'tag-mittel' : 'tag-niedrig';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bg3);">
+      <span class="tag ${cls}" style="min-width:28px;text-align:center;">${a.p}</span>
+      <span style="flex:1;font-size:13px;font-weight:500;">${a.text}</span>
+      <span style="font-size:11px;color:var(--muted);white-space:nowrap;">${a.owner}</span>
+      <span class="task-dl">${a.dl}</span>
+    </div>`;
+  }).join('');
+
+  // Dinova checklist
+  document.getElementById('dinova-cl').innerHTML = dinovaChecklist.map(s =>
+    `<div class="cl-section">
+      <div class="cl-label">${s.grp}</div>
+      ${s.items.map(i => `<div class="cl-item"><input type="checkbox"/>${i}</div>`).join('')}
+    </div>`
+  ).join('');
+
+  // Sprint 1
+  document.getElementById('sprint1').innerHTML = sprint1.map(i =>
+    `<div class="cl-item" style="break-inside:avoid;"><input type="checkbox"/>${i}</div>`
+  ).join('');
+}
+
+// ─── TAB NAVIGATION ───────────────────────────────────────────
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
   });
-}
-
-// Category Tree
-function buildCategoryTree() {
-  const wrap = document.getElementById('category-tree');
-  function renderNode(nodes, depth) {
-    return nodes.map(n => {
-      if(typeof n === 'string') {
-        return `<div style="padding-left:${depth*16}px;color:var(--muted);">└ ${n}</div>`;
-      }
-      const childrenHtml = n.children && n.children.length ? renderNode(n.children, depth+1) : '';
-      const color = depth === 0 ? 'var(--green)' : 'var(--black)';
-      return `<div style="padding-left:${depth*16}px;font-weight:${depth<1?700:600};color:${color};margin-top:${depth===0?10:2}px;">
-        ${depth === 0 ? '📁' : '├'} ${n.name}
-      </div>${childrenHtml}`;
-    }).join('');
-  }
-  wrap.innerHTML = renderNode(categoryTree, 0);
-}
-
-// Sprint 0 Actions
-function buildSprint0() {
-  const wrap = document.getElementById('sprint0-actions');
-  const actions = [
-    { p:'p1', text:'Sortiments-Inventur starten', owner:'Dinova intern', dw:'Woche 1' },
-    { p:'p1', text:'EAN-Status aller Artikel prüfen', owner:'Dinova intern', dw:'Woche 1' },
-    { p:'p1', text:'Entscheidungen E1–E6 abstimmen (Workshop)', owner:'GF + E-Com Manager', dw:'Woche 1–2' },
-    { p:'p1', text:'Kundendaten-Checkliste übergeben', owner:'E-Com Manager', dw:'Woche 1' },
-    { p:'p2', text:'Pilotgruppe (50 Artikel) definieren', owner:'E-Com Manager', dw:'Woche 2' },
-    { p:'p2', text:'Shopify-Account anlegen (Plan-Wahl)', owner:'E-Com Manager', dw:'Woche 2' },
-    { p:'p2', text:'Attributmodell finalisieren', owner:'E-Com Manager', dw:'Woche 2' },
-    { p:'p3', text:'Foto-Briefing erstellen', owner:'E-Com Manager', dw:'Woche 3' },
-    { p:'p2', text:'Kategoriebaum final abstimmen', owner:'E-Com Manager + GF', dw:'Woche 2' },
-  ];
-  wrap.innerHTML = actions.map(a => `
-    <div class="action-row">
-      <div class="action-prio ${a.p}">${a.p.toUpperCase()}</div>
-      <div class="action-text">${a.text}</div>
-      <div class="action-owner">${a.owner}</div>
-      <div class="action-deadline">${a.dw}</div>
-    </div>`).join('');
-}
-
-// Sprint 1 Checklist
-function buildSprint1() {
-  const wrap = document.getElementById('sprint1-checklist');
-  const items = [
-    'Domain verbinden','Theme installieren und konfigurieren','Grundeinstellungen (EUR, DE, Steuer)',
-    'Zahlungsanbieter aktivieren','Versandprofile anlegen','Rechtliche Seiten einfügen (Anwalt!)',
-    'E-Mail-Vorlagen anpassen','Favicon, Logo, Farbschema','Metafields für Attribute anlegen',
-    'Produktdaten-Template erstellen','Content-Briefing Produktfotos','Analytics tracken (GA4)'
-  ];
-  wrap.innerHTML = items.map(i => `
-    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bg3);">
-      <input type="checkbox" style="accent-color:var(--green);width:15px;height:15px;cursor:pointer;"/>
-      <span style="font-size:13px;">${i}</span>
-    </div>`).join('');
-}
-
-// Dinova Checklist
-function buildDinovaChecklist() {
-  const wrap = document.getElementById('dinova-checklist');
-  const sections = [
-    { label:'Unternehmen', items:['Handelsregister, Steuernummer, USt-ID','Impressumspflichtige Angaben','Bankverbindung für Payment-Onboarding','Bevollmächtigte Person für Account-Eröffnungen','Markenrecht-Status'] },
-    { label:'Sortiment', items:['Vollständige Artikelliste','EAN-Codes / GTINs','Einkaufspreise (netto)','Gewünschte VK-Preise / Margen-Vorgabe','Produktspezifikationen (Maße, Gewicht)','Vorhandene Fotos (+ Nutzungsrechte!)'] },
-    { label:'Logistik', items:['Lagerstandort & -kapazität','Versanddienstleister','Versandkosten-Struktur','Retourenablauf','Umgang mit Bruch/Beschädigung'] },
-    { label:'Branding', items:['Logo-Dateien (Vektor/SVG/PNG)','CI (Farben, Typografie)','Social-Media-Kanäle','Newsletter-Verteiler'] },
-  ];
-  wrap.innerHTML = sections.map(s => `
-    <div style="margin-bottom:14px;">
-      <div style="font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:6px;">${s.label}</div>
-      ${s.items.map(i => `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bg3);">
-        <input type="checkbox" style="accent-color:var(--green);width:14px;height:14px;cursor:pointer;"/>
-        <span style="font-size:12px;">${i}</span>
-      </div>`).join('')}
-    </div>`).join('');
-}
-
-// Timeline
-function buildTimeline() {
-  const wrap = document.getElementById('timeline-rows');
-  const tl = [
-    { label:'Phase 0', start:0, width:4, status:'active' },
-    { label:'Phase 1', start:2, width:6, status:'future' },
-    { label:'Phase 2', start:5, width:9, status:'future' },
-    { label:'Phase 3', start:11, width:4, status:'future' },
-    { label:'Phase 4', start:9, width:7, status:'future' },
-    { label:'Phase 5', start:16, width:4, status:'future' },
-  ];
-  const total = 20;
-  wrap.innerHTML = tl.map(t => `
-    <div style="display:grid;grid-template-columns:120px 1fr;gap:12px;margin-bottom:10px;align-items:center;">
-      <div style="font-size:12px;font-weight:600;color:var(--black);">${t.label}</div>
-      <div style="position:relative;height:20px;background:var(--bg3);border-radius:999px;">
-        <div style="position:absolute;left:${t.start/total*100}%;width:${t.width/total*100}%;height:100%;border-radius:999px;
-          background:${t.status==='active'?'var(--green)':t.status==='done'?'var(--green-mid)':'var(--border)'};
-          display:flex;align-items:center;justify-content:center;">
-          ${t.status==='active'?'<span style="font-size:10px;font-weight:700;color:white;white-space:nowrap;padding:0 6px;">Aktiv</span>':''}
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-// ══════════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════════
-buildRoadmap();
-buildRisks();
-buildDecisions();
-buildAttributes();
-buildCategoryTree();
-buildSprint0();
-buildSprint1();
-buildDinovaChecklist();
-buildTimeline();
+});
 </script>
 </body>
 </html>
