@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinova Project Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --line: #2a2f3a;
+      --text: #f4f7fb;
+      --muted: #9da7b8;
+      --accent: #f2552c;
+      --ok: #1f9d55;
+      --warn: #d97706;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .hero {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .metric { font-size: 36px; font-weight: 700; margin: 8px 0; }
+    .label { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+    ul { margin: 10px 0 0; padding-left: 18px; }
+    li { margin: 8px 0; }
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(242,85,44,.12);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+    .milestone { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0; }
+    .status { color: var(--muted); }
+    .footer { margin-top: 24px; color: var(--muted); font-size: 14px; }
+    a { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">GitHub Pages Dashboard</div>
+      <h1 id="projectName">Dinova E-Commerce Setup</h1>
+      <div class="sub">Projektübersicht für Strategie, Roadmap und operative Steuerung.</div>
+      <div class="pill" id="phase">Phase 0 – Foundation</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Gesamtfortschritt</div>
+        <div class="metric" id="progress">0%</div>
+        <div class="sub">Manuell pflegbar über <code>data/dashboard-data.json</code></div>
+      </div>
+      <div class="card">
+        <div class="label">Letztes Update</div>
+        <div class="metric" id="lastUpdated">-</div>
+        <div class="sub">Wöchentlich aktualisieren.</div>
+      </div>
+      <div class="card">
+        <div class="label">Strategie-Dokument</div>
+        <div class="metric" style="font-size:22px;">docs/strategy.md</div>
+        <div class="sub">Zentrale Leitplanke für Scope und Prioritäten.</div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="card">
+        <div class="label">Milestones</div>
+        <div id="milestones"></div>
+      </div>
+      <div class="card">
+        <div class="label">Offene Entscheidungen</div>
+        <ul id="decisions"></ul>
+      </div>
+      <div class="card">
+        <div class="label">Top-Risiken</div>
+        <ul id="risks"></ul>
+      </div>
+      <div class="card">
+        <div class="label">Nächste Maßnahmen</div>
+        <ul id="actions"></ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Empfehlung: GitHub Projects für Steuerung nutzen und dieses Dashboard für Management-Überblick.
+    </div>
+  </div>
+
+  <script>
+    fetch('./data/dashboard-data.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('projectName').textContent = data.projectName;
+        document.getElementById('phase').textContent = data.currentPhase;
+        document.getElementById('progress').textContent = data.overallProgress + '%';
+        document.getElementById('lastUpdated').textContent = data.lastUpdated;
+
+        const milestones = document.getElementById('milestones');
+        data.milestones.forEach(m => {
+          const row = document.createElement('div');
+          row.className = 'milestone';
+          row.innerHTML = `<span>${m.name}</span><span class="status">${m.status}</span>`;
+          milestones.appendChild(row);
+        });
+
+        const fillList = (id, items) => {
+          const el = document.getElementById(id);
+          items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            el.appendChild(li);
+          });
+        };
+
+        fillList('decisions', data.openDecisions);
+        fillList('risks', data.topRisks);
+        fillList('actions', data.nextActions);
+      });
+  </script>
+</body>
+</html>

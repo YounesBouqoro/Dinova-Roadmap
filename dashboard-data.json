@@ -1,0 +1,34 @@
+{
+  "projectName": "Dinova E-Commerce Setup",
+  "lastUpdated": "2026-04-09",
+  "currentPhase": "Phase 0 – Foundation & Entscheidungen",
+  "overallProgress": 12,
+  "milestones": [
+    { "name": "M1 Foundation", "status": "in progress" },
+    { "name": "M2 Shopify Core Setup", "status": "not started" },
+    { "name": "M3 Pilotgruppe content-ready", "status": "not started" },
+    { "name": "M4 Shopify Go-Live ready", "status": "not started" },
+    { "name": "M5 Marktplatzdaten ready", "status": "not started" }
+  ],
+  "openDecisions": [
+    "Positionierung: Premium vs. Mid-Market",
+    "B2C only vs. B2C + B2B in Phase 1",
+    "Eigenmarke vs. Fremdmarken vs. Mix",
+    "Lager- und Fulfillment-Modell",
+    "Marktplatz-Priorisierung"
+  ],
+  "topRisks": [
+    "Unvollständige Produktdaten",
+    "Fehlende EAN/GTINs",
+    "Zu breites Sortiment zum Start",
+    "Schlechte Produktfotografie",
+    "Bruchschäden im Versand"
+  ],
+  "nextActions": [
+    "Sortiments-Inventur starten",
+    "EAN-Status aller Artikel prüfen",
+    "Kundendaten-Checkliste an Dinova senden",
+    "Pilotgruppe mit 20–50 Artikeln definieren",
+    "Attributmodell finalisieren"
+  ]
+}
